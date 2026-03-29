@@ -38,14 +38,12 @@ const HeroSection = () => {
         className="flex items-center gap-4 mt-10"
       >
         <button
-          onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-          className="bg-primary text-primary-foreground px-8 py-4 text-sm font-medium uppercase tracking-[0.05em] hover:bg-primary/90 transition-colors"
+          className="bg-primary text-primary-foreground px-8 py-4 text-sm font-medium uppercase tracking-[0.05em] hover:bg-primary/90 transition-colors rounded-full"
         >
           Start a Project
         </button>
         <button
-          onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-          className="flex items-center gap-2 text-sm font-medium uppercase tracking-[0.05em] hover:opacity-70 transition-opacity"
+          className="flex items-center rounded-xl gap-2 text-sm font-medium uppercase tracking-[0.05em] hover:opacity-70 transition-opacity"
         >
           View Our Work
           <span className="transition-transform group-hover:translate-x-1">→</span>

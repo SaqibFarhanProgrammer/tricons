@@ -16,7 +16,9 @@ const Navbar = () => {
 
   const scrollTo = (id: string) => {
     setMobileOpen(false);
-    document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: "smooth" });
+    document
+      .getElementById(id.toLowerCase())
+      ?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -30,20 +32,31 @@ const Navbar = () => {
         }`}
       >
         <div className="section-container flex items-center justify-between">
-          <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-0">
-            <span className="text-xl font-extrabold tracking-[0.1em] uppercase">TRICON</span>
-            <span className="text-xl font-normal tracking-[0.1em] uppercase ml-1">STUDIOS</span>
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="flex items-center gap-0"
+          >
+            <span className="text-xl font-extrabold tracking-[0.1em] uppercase">
+              TRICON
+            </span>
+            <span className="text-xl font-normal tracking-[0.1em] uppercase ml-1">
+              STUDIOS
+            </span>
           </button>
 
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <button key={link} onClick={() => scrollTo(link)} className="nav-link">
+              <button
+                key={link}
+                onClick={() => scrollTo(link)}
+                className="nav-link"
+              >
                 {link}
               </button>
             ))}
             <button
               onClick={() => scrollTo("Contact")}
-              className="bg-primary text-primary-foreground px-6 py-3 text-xs font-medium uppercase tracking-[0.05em] hover:bg-primary/90 transition-colors"
+              className="bg-primary rounded-full   text-primary-foreground px-6 py-3 text-xs font-medium uppercase tracking-[0.05em] hover:bg-primary/90 transition-colors"
             >
               Start a Project
             </button>
@@ -64,7 +77,10 @@ const Navbar = () => {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[200] bg-background flex flex-col items-center justify-center gap-8"
           >
-            <button onClick={() => setMobileOpen(false)} className="absolute top-6 right-6">
+            <button
+              onClick={() => setMobileOpen(false)}
+              className="absolute top-6 right-6"
+            >
               <X size={24} />
             </button>
             {navLinks.map((link, i) => (
