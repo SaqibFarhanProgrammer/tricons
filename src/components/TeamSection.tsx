@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import s from "../assets/s.png";
-import u from "../assets/usman.webp";
+import u from "../assets/u.jpg";
 import h from "../assets/huzaifa.webp";
 
 const team = [
