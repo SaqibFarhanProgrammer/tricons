@@ -62,7 +62,7 @@ const TeamSection = () => {
                   alt={member.name}
                   className={`
       h-full w-full object-cover 
-      ${member.name === "Muhammad Usman" ? "object-cover pt-20 scale-150" : "object-center"} 
+      object-center
       grayscale
       transition-all duration-500 
       group-hover:scale-145
