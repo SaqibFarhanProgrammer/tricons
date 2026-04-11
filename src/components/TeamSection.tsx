@@ -9,6 +9,8 @@ import umer from "../assets/umer.jpg";
 const TeamSection = () => {
   const carouselRef = useRef(null);
   const autoScrollRef = useRef(null);
+import u from "../assets/u.jpg";
+import h from "../assets/huzaifa.webp";
 
   const team = [
     {
@@ -129,6 +131,14 @@ const TeamSection = () => {
                 <img
                   src={member.image}
                   className="w-full h-full object-cover"
+                  alt={member.name}
+                  className={`
+      h-full w-full object-cover 
+      object-center
+      grayscale
+      transition-all duration-500 
+      group-hover:scale-145
+    `}
                 />
               </div>
 
