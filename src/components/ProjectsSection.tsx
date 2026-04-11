@@ -6,24 +6,27 @@ import projectProjectio from "@/assets/project-projectio.jpg";
 const projects = [
   {
     image: projectRestaurant,
-    category: "WEB APPLICATION",
-    title: "Restaurant Hub",
-    description: "Complete restaurant management system with real-time order tracking and analytics.",
-    tech: ["React", "Node.js", "MongoDB"],
+    category: "FINTECH PLATFORM",
+    title: "WealthPulse",
+    description:
+      "Modern financial dashboard for small businesses with real-time insights, expense tracking, and smart analytics.",
+    tech: ["React", "Node.js", "PostgreSQL"],
   },
   {
     image: projectSplitty,
-    category: "MOBILE APP",
-    title: "Splitty",
-    description: "Smart expense splitting app that makes sharing bills effortless between friends.",
-    tech: ["React Native", "Firebase", "Stripe"],
+    category: "UTILITY APP",
+    title: "Splitly",
+    description:
+      "Smart group expense splitting system that automatically calculates balances and simplifies settlements.",
+    tech: ["Next.js", "Node.js", "PostgreSQL"],
   },
   {
     image: projectProjectio,
     category: "SAAS PLATFORM",
     title: "Projectio",
-    description: "Project management platform with Kanban boards, team collaboration and analytics.",
-    tech: ["Next.js", "PostgreSQL", "Tailwind"],
+    description:
+      "Advanced project management tool with Kanban boards, collaboration, analytics, and real-time tracking.",
+    tech: ["Next.js", "TypeScript", "Tailwind"],
   },
 ];
 
