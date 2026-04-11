@@ -2,15 +2,13 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import s from "../assets/s.png";
-import u from "../assets/usman.webp";
+import u from "../assets/u.jpg";
 import h from "../assets/huzaifa.jpeg";
 import umer from "../assets/umer.jpg";
 
 const TeamSection = () => {
   const carouselRef = useRef(null);
   const autoScrollRef = useRef(null);
-import u from "../assets/u.jpg";
-import h from "../assets/huzaifa.webp";
 
   const team = [
     {
@@ -51,7 +49,9 @@ import h from "../assets/huzaifa.webp";
       quote: "Content is crafted with purpose, pacing, and clarity.",
       num: "04",
       image: umer,
-      details: { skills: ["Premiere Pro", "Photoshop", "Illustrator", "CapCut"] },
+      details: {
+        skills: ["Premiere Pro", "Photoshop", "Illustrator", "CapCut"],
+      },
     },
   ];
 
@@ -149,8 +149,6 @@ import h from "../assets/huzaifa.webp";
                 </p>
 
                 <p className="text-sm italic mb-3">"{member.quote}"</p>
-
-              
               </div>
             </div>
           ))}
@@ -160,4 +158,4 @@ import h from "../assets/huzaifa.webp";
   );
 };
 
-export default TeamSection; 
+export default TeamSection;
