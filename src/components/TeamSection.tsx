@@ -1,82 +1,148 @@
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import s from "../assets/s.png";
 import u from "../assets/usman.webp";
-import h from "../assets/huzaifa.webp";
+import h from "../assets/huzaifa.jpeg";
+import umer from "../assets/umer.jpg";
 
-const team = [
-  {
-    name: "Ali Huzaifa",
-    role: "Builds scalable systems and leads backend architecture.",
-    quote:
-      "Great software starts with understanding the problem deeply before writing a single line of code.",
-    initials: "AH",
-    num: "01",
-    image: h,
-  },
-  {
-    name: "Saqib Farhan",
-    role: "Designs clean interfaces and develops modern web applications.",
-    quote:
-      "Design isn't about decoration — it's about making complex things feel simple and intuitive.",
-    initials: "SF",
-    num: "02",
-    image: s,
-  },
-  {
-    name: "Muhammad Usman",
-    role: "Develops responsive interfaces and manages web content.",
-    quote:
-      "The best architecture is one that scales without anyone noticing it needed to.",
-    initials: "MU",
-    num: "03",
-    image: u,
-  },
-];
 const TeamSection = () => {
-  return (
-    <section id="team" className="section-spacing">
-      <div className="section-container">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <p className="section-label">OUR TEAM</p>
-          <h2 className="section-title">The people behind the code</h2>
-        </motion.div>
+  const carouselRef = useRef(null);
+  const autoScrollRef = useRef(null);
 
-        <div className="grid md:grid-cols-3 gap-8 mt-16">
-          {team.map((member, i) => (
-            <motion.div
-              key={member.name}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.15, duration: 0.6 }}
-              className="group"
+  const team = [
+    {
+      name: "Huzaifa",
+      fullName: "Ali Huzaifa",
+      role: "Co-Founder & Lead Software Engineer",
+      badge: "Co-Founder",
+      quote: "Great software starts with understanding the problem deeply.",
+      num: "01",
+      image: h,
+      details: { skills: ["Node.js", "MongoDB", "Express", "System Design"] },
+    },
+    {
+      name: "Saqib",
+      fullName: "Saqib Farhan",
+      role: "Co-Founder, Lead Developer & UI Designer",
+      badge: "Co-Founder",
+      quote: "Design is about making complex things feel simple.",
+      num: "02",
+      image: s,
+      details: { skills: ["React", "JavaScript", "GSAP", "Tailwind CSS"] },
+    },
+    {
+      name: "Usman",
+      fullName: "Muhammad Usman",
+      role: "Frontend Developer & Content Manager",
+      badge: "Team",
+      quote: "The best architecture scales without anyone noticing.",
+      num: "03",
+      image: u,
+      details: { skills: ["HTML", "CSS", "JavaScript", "Content Management"] },
+    },
+    {
+      name: "Umer",
+      fullName: "Umer Farooq",
+      role: "Creative Video Editor",
+      badge: "Team",
+      quote: "Content is crafted with purpose, pacing, and clarity.",
+      num: "04",
+      image: umer,
+      details: { skills: ["Premiere Pro", "Photoshop", "Illustrator", "CapCut"] },
+    },
+  ];
+
+  // Infinite Auto Scroll
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+
+    let isPaused = false;
+
+    const start = () => {
+      autoScrollRef.current = setInterval(() => {
+        if (isPaused) return;
+
+        carousel.scrollLeft += 0.5; // speed control
+
+        if (carousel.scrollLeft >= carousel.scrollWidth / 2) {
+          carousel.scrollLeft = 0;
+        }
+      }, 16);
+    };
+
+    start();
+
+    const pause = () => (isPaused = true);
+    const resume = () => (isPaused = false);
+
+    carousel.addEventListener("mouseenter", pause);
+    carousel.addEventListener("mouseleave", resume);
+
+    return () => {
+      clearInterval(autoScrollRef.current);
+      carousel.removeEventListener("mouseenter", pause);
+      carousel.removeEventListener("mouseleave", resume);
+    };
+  }, []);
+
+  return (
+    <section className="min-h-screen py-20 px-4 bg-background">
+      <div className="max-w-7xl mx-auto text-center mb-16">
+        <motion.h2 className="text-4xl font-bold">
+          The people behind the code
+        </motion.h2>
+      </div>
+
+      <div className="max-w-6xl mx-auto relative">
+        {/* Buttons (manual scroll) */}
+        <button
+          onClick={() => (carouselRef.current.scrollLeft -= 350)}
+          className="absolute -left-10 top-1/2 -translate-y-1/2 z-10"
+        >
+          <ArrowLeft />
+        </button>
+
+        <button
+          onClick={() => (carouselRef.current.scrollLeft += 350)}
+          className="absolute -right-10 top-1/2 -translate-y-1/2 z-10"
+        >
+          <ArrowRight />
+        </button>
+
+        {/* Infinite Track */}
+        <div
+          ref={carouselRef}
+          className="flex gap-8 overflow-x-auto px-4"
+          style={{
+            scrollBehavior: "auto",
+            scrollbarWidth: "none",
+          }}
+        >
+          {[...team, ...team].map((member, index) => (
+            <div
+              key={index}
+              className="flex-shrink-0 w-[300px] bg-card border rounded-2xl overflow-hidden"
             >
-              <div className="aspect-[3/4] bg-muted overflow-hidden">
+              <div className="h-80 overflow-hidden">
                 <img
                   src={member.image}
-                  alt={member.name}
-                  className={`
-      h-full w-full object-cover 
-      ${member.name === "Muhammad Usman" ? "object-cover pt-20 scale-150" : "object-center"} 
-      grayscale
-      transition-all duration-500 
-      group-hover:scale-145
-    `}
+                  className="w-full h-full object-cover"
                 />
               </div>
-              <div className="pt-6">
-                <p className="text-xs text-muted-foreground">{member.num}</p>
-                <h3 className="text-2xl font-semibold mt-1">{member.name}</h3>
-                <p className="text-sm uppercase tracking-[0.1em] text-muted-foreground mt-1">
+
+              <div className="p-5">
+                <h3 className="text-xl font-bold">{member.fullName}</h3>
+                <p className="text-sm text-muted-foreground mb-2">
                   {member.role}
                 </p>
+
+                <p className="text-sm italic mb-3">"{member.quote}"</p>
+
+              
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
@@ -84,4 +150,4 @@ const TeamSection = () => {
   );
 };
 
-export default TeamSection;
+export default TeamSection; 
