@@ -11,6 +11,7 @@ import TeamPage from "./pages/Teams";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import ContactPage from "./pages/Contact";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/teams" element={<TeamPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
 
