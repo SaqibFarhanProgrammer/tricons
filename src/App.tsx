@@ -1,27 +1,36 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Toaster as Sonner } from "@/components/ui/sonner";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import Index from "./pages/Index.tsx";
-import NotFound from "./pages/NotFound.tsx";
+import { Toaster as Sonner } from "@/components/ui/sonner";
 
-const queryClient = new QueryClient();
+import Index from "./pages/Index";
+import NotFound from "./pages/NotFound";
+import ServicesPage from "./pages/Services";
+import AboutPage from "./pages/About";
+import TeamPage from "./pages/Teams";
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+
+function App() {
+  return (
+    <div>
+      <Navbar />
+
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/teams" element={<TeamPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+
+      <Footer />
+    </div>
+  );
+}
 
 export default App;

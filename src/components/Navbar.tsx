@@ -1,12 +1,20 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
-const navLinks = ["Services", "Projects", "Team", "Contact"];
+const navLinks = [
+  { name: "Who We Are", path: "/about" },
+  { name: "Services", path: "/services" },
+  { name: "Projects", path: "/" },
+  { name: "Team", path: "/teams" },
+  { name: "Contact", path: "/contact" },
+];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -14,68 +22,65 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollTo = (id: string) => {
-    setMobileOpen(false);
-    document
-      .getElementById(id.toLowerCase())
-      ?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <>
       <motion.header
         initial={{ y: -80 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 h-20 flex items-center transition-all duration-300 ${
+        transition={{ duration: 0.6 }}
+        className={`fixed top-0 left-0 right-0 z-50 h-20 flex items-center transition-all ${
           scrolled ? "glass-header" : "bg-transparent"
         }`}
       >
         <div className="section-container flex items-center justify-between">
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex items-center gap-0"
-          >
+
+          {/* LOGO */}
+          <Link to="/" className="flex items-center">
             <span className="text-xl font-extrabold tracking-[0.1em] uppercase">
               TRICON
             </span>
-            <span className="text-xl font-normal tracking-[0.1em] uppercase ml-1">
+            <span className="text-xl ml-1 tracking-[0.1em] uppercase">
               STUDIOS
             </span>
-          </button>
+          </Link>
 
+          {/* DESKTOP NAV */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <button
-                key={link}
-                onClick={() => scrollTo(link)}
-                className="nav-link"
+              <Link
+                key={link.name}
+                to={link.path}
+                className={`nav-link ${
+                  location.pathname === link.path ? "text-black font-semibold" : ""
+                }`}
               >
-                {link}
-              </button>
+                {link.name}
+              </Link>
             ))}
-            <button
-              onClick={() => scrollTo("Contact")}
-              className="bg-primary rounded-full   text-primary-foreground px-6 py-3 text-xs font-medium uppercase tracking-[0.05em] hover:bg-primary/90 transition-colors"
+
+            <Link
+              to="/contact"
+              className="bg-primary rounded-full text-primary-foreground px-6 py-3 text-xs uppercase tracking-[0.05em]"
             >
               Start a Project
-            </button>
+            </Link>
           </nav>
 
+          {/* MOBILE MENU BUTTON */}
           <button onClick={() => setMobileOpen(true)} className="md:hidden">
             <Menu size={24} />
           </button>
         </div>
       </motion.header>
 
-      {/* Mobile menu */}
+      {/* MOBILE MENU */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] bg-background flex flex-col items-center justify-center gap-8"
+            className="fixed inset-0 z-[200] bg-white flex flex-col items-center justify-center gap-8"
           >
             <button
               onClick={() => setMobileOpen(false)}
@@ -83,17 +88,24 @@ const Navbar = () => {
             >
               <X size={24} />
             </button>
+
             {navLinks.map((link, i) => (
-              <motion.button
-                key={link}
+              <motion.div
+                key={link.name}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                onClick={() => scrollTo(link)}
-                className="text-2xl font-semibold uppercase tracking-[0.1em]"
               >
-                {link}
-              </motion.button>
+                <Link
+                  to={link.path}
+                  onClick={() => setMobileOpen(false)}
+                  className={`text-2xl font-semibold uppercase ${
+                    location.pathname === link.path ? "text-black" : "text-neutral-500"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              </motion.div>
             ))}
           </motion.div>
         )}

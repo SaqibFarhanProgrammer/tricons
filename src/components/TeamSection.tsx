@@ -3,8 +3,9 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import s from "../assets/s.png";
 import u from "../assets/u.jpg";
-import h from "../assets/huzaifa.jpeg";
+import h from "../assets/huzaifa3.jpg";
 import umer from "../assets/umer.jpg";
+import ayan from "@/assets/ayan.jpeg";
 
 const TeamSection = () => {
   const carouselRef = useRef(null);
@@ -39,6 +40,13 @@ const TeamSection = () => {
       quote: "Content is crafted with purpose, pacing, and clarity.",
       image: umer,
     },
+    {
+      name: "Ayan",
+      fullName: "Muhammad Ayan",
+      role: "AI Engineer",
+      quote: "AI systems are built to automate intelligence, not replace it.",
+      image: ayan,
+    },
   ];
 
   useEffect(() => {
@@ -47,19 +55,15 @@ const TeamSection = () => {
 
     let isPaused = false;
 
-    const start = () => {
-      autoScrollRef.current = setInterval(() => {
-        if (isPaused) return;
+    autoScrollRef.current = setInterval(() => {
+      if (isPaused) return;
 
-        carousel.scrollLeft += 0.5;
+      carousel.scrollLeft += 0.5;
 
-        if (carousel.scrollLeft >= carousel.scrollWidth / 2) {
-          carousel.scrollLeft = 0;
-        }
-      }, 16);
-    };
-
-    start();
+      if (carousel.scrollLeft >= carousel.scrollWidth / 2) {
+        carousel.scrollLeft = 0;
+      }
+    }, 16);
 
     const pause = () => (isPaused = true);
     const resume = () => (isPaused = false);
@@ -75,8 +79,7 @@ const TeamSection = () => {
   }, []);
 
   return (
-    <section className="min-h-screen py-20 px-4 bg-background">
-      {/* Heading */}
+    <section className="min-h-screen py-20 px-4 ">
       <div className="max-w-7xl mx-auto text-center mb-16">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -88,31 +91,25 @@ const TeamSection = () => {
         </motion.h2>
       </div>
 
-      {/* Carousel Wrapper */}
-      <div className="max-w-6xl mx-auto relative overflow-hidden">
+      <div className="w-full   mx-auto relative overflow-hidden">
+        <div className="pointer-events-none absolute left-0 top-0 h-full w-[15%] md:w-[10%] z-20 bg-gradient-to-r from-background via-background/80 to-transparent backdrop-blur-[2px]" />
 
-        {/* LEFT FADE */}
-        <div className="pointer-events-none absolute left-0 top-0 h-full w-32 z-10 bg-gradient-to-r from-background to-transparent" />
+        <div className="pointer-events-none absolute right-0 top-0 h-full w-[15%] md:w-[10%] z-20 bg-gradient-to-l from-background via-background/80 to-transparent backdrop-blur-[2px]" />
 
-        {/* RIGHT FADE */}
-        <div className="pointer-events-none absolute right-0 top-0 h-full w-32 z-10 bg-gradient-to-l from-background to-transparent" />
-
-        {/* Buttons */}
         <button
           onClick={() => (carouselRef.current.scrollLeft -= 350)}
-          className="absolute -left-10 top-1/2 -translate-y-1/2 z-20 bg-background border rounded-full p-2"
+          className="absolute -left-6 top-1/2 -translate-y-1/2 z-30 bg-background border rounded-full p-2"
         >
           <ArrowLeft />
         </button>
 
         <button
           onClick={() => (carouselRef.current.scrollLeft += 350)}
-          className="absolute -right-10 top-1/2 -translate-y-1/2 z-20 bg-background border rounded-full p-2"
+          className="absolute -right-6 top-1/2 -translate-y-1/2 z-30 bg-background border rounded-full p-2"
         >
           <ArrowRight />
         </button>
 
-        {/* Carousel */}
         <div
           ref={carouselRef}
           className="flex gap-8 overflow-x-auto px-4"
@@ -126,7 +123,6 @@ const TeamSection = () => {
               key={index}
               className="group flex-shrink-0 w-[300px] bg-card border rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.03]"
             >
-              {/* Image */}
               <div className="h-80 overflow-hidden">
                 <img
                   src={member.image}
@@ -135,7 +131,6 @@ const TeamSection = () => {
                 />
               </div>
 
-              {/* Content */}
               <div className="p-5">
                 <h3 className="text-xl font-bold">{member.fullName}</h3>
                 <p className="text-sm text-muted-foreground mb-2">

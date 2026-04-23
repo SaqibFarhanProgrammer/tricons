@@ -14,7 +14,6 @@ import Footer from "@/components/Footer";
 const Index = () => {
   return (
     <>
-      <Navbar />
       <HeroSection />
       <StatsBar />
       <ServicesSection />
@@ -25,7 +24,6 @@ const Index = () => {
       <TestimonialsSection />
       <FAQSection />
       <ContactSection />
-      <Footer />
     </>
   );
 };

@@ -5,14 +5,12 @@ import light from "@/assets/light.png";
 const HeroSection = () => {
   return (
     <section className="min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 relative overflow-hidden py-20">
-      {/* Background Light Effect */}
       <img 
         src={light} 
         alt="" 
         className="w-full h-full object-cover absolute inset-0 brightness-200 blur-[60px] sm:blur-[80px] lg:blur-[110px] -rotate-45 -z-10 opacity-60 pointer-events-none" 
       />
 
-      {/* Label */}
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -22,7 +20,6 @@ const HeroSection = () => {
         SOFTWARE SOLUTIONS AGENCY
       </motion.p>
 
-      {/* Main Heading - Single responsive heading instead of 3 overlapping */}
       <motion.h1
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -32,7 +29,6 @@ const HeroSection = () => {
         Building smart solutions to simplify complex problems.
       </motion.h1>
 
-      {/* Subtitle */}
       <motion.p
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -42,7 +38,6 @@ const HeroSection = () => {
         An elite agency combining cutting-edge technology with exceptional design to deliver solutions that make a real difference.
       </motion.p>
 
-      {/* Buttons */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -64,7 +59,6 @@ const HeroSection = () => {
         </button>
       </motion.div>
 
-      {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
