@@ -13,6 +13,7 @@ import u from "@/assets/u.jpg";
 import s from "@/assets/s.png";
 import umer from "@/assets/umer.jpg";
 import ayan from "@/assets/ayan.jpeg";
+
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
@@ -153,17 +154,17 @@ const stats = [
 
 export default function TeamPage() {
   return (
-    <main className="min-h-screen bg-white text-black">
-      <section className="pt-32 pb-20 px-6 md:px-12 lg:px-24">
-        <div className="max-w-5xl mx-auto">
+    <main className="min-h-screen w-full bg-white text-black overflow-x-hidden">
+      <section className="pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20 px-4 sm:px-6 md:px-12 lg:px-24">
+        <div className="max-w-5xl mx-auto w-full">
           <motion.div {...fadeInUp}>
-            <p className="text-sm uppercase tracking-[0.2em] text-neutral-500 mb-6">
+            <p className="text-xs sm:text-sm uppercase tracking-[0.2em] text-neutral-500 mb-4 sm:mb-6">
               The Team
             </p>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold  leading-tight -tracking-[5px] text-black">
-              The people <span className="">behind the code</span>
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-tight -tracking-[2px] md:-tracking-[5px] text-black break-words">
+              The people <span>behind the code</span>
             </h1>
-            <p className="mt-8 text-lg md:text-xl text-neutral-600 leading-relaxed max-w-3xl">
+            <p className="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl text-neutral-600 leading-relaxed max-w-3xl">
               We're a tight-knit team of engineers, designers, and creators who
               believe that exceptional software comes from exceptional people.
               Meet the minds shaping Tricon Studios.
@@ -175,14 +176,14 @@ export default function TeamPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-16 border-t border-neutral-200"
+            className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mt-12 sm:mt-16 pt-12 sm:pt-16 border-t border-neutral-200"
           >
             {stats.map((stat) => (
               <div key={stat.label}>
-                <p className="text-3xl md:text-4xl font-light text-black">
+                <p className="text-2xl sm:text-3xl md:text-4xl font-light text-black">
                   {stat.number}
                 </p>
-                <p className="mt-2 text-sm text-neutral-500 uppercase tracking-[0.1em]">
+                <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-neutral-500 uppercase tracking-[0.1em]">
                   {stat.label}
                 </p>
               </div>
@@ -191,18 +192,18 @@ export default function TeamPage() {
         </div>
       </section>
 
-      <section className="py-20 px-6 md:px-12 lg:px-24 border-t border-neutral-200">
-        <div className="max-w-5xl mx-auto">
-          <motion.div {...fadeInUp} className="mb-20">
-            <p className="text-sm uppercase tracking-[0.2em] text-neutral-500 mb-4">
+      <section className="py-16 sm:py-20 px-4 sm:px-6 md:px-12 lg:px-24 border-t border-neutral-200">
+        <div className="max-w-5xl mx-auto w-full">
+          <motion.div {...fadeInUp} className="mb-12 sm:mb-20">
+            <p className="text-xs sm:text-sm uppercase tracking-[0.2em] text-neutral-500 mb-3 sm:mb-4">
               Founding Team
             </p>
-            <h2 className="text-3xl md:text-4xl font-light text-black">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-black">
               Four minds, one mission
             </h2>
           </motion.div>
 
-          <div className="space-y-24">
+          <div className="space-y-16 sm:space-y-24">
             {team.map((member, index) => (
               <motion.article
                 key={member.id}
@@ -211,88 +212,52 @@ export default function TeamPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7 }}
-                className={`scroll-mt-32 ${index !== 0 ? "pt-24 border-t border-neutral-200" : ""}`}
+                className={`scroll-mt-24 sm:scroll-mt-32 ${index !== 0 ? "pt-16 sm:pt-24 border-t border-neutral-200" : ""}`}
               >
-                <div
-                  className={`grid md:grid-cols-12 gap-12 items-start ${index % 2 === 1 ? "md:flex-row-reverse" : ""}`}
-                >
-                  <div className="md:col-span-4">
-                    <div className="aspect-[3/4] bg-neutral-100 relative overflow-hidden group">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12 items-start">
+                  <div className="md:col-span-4 w-full">
+                    <div className="aspect-[3/4] bg-neutral-100 relative overflow-hidden group w-full">
                       <img
                         src={`${member.image}`}
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300" />
-                    </div>
-
-                    <div className="flex gap-4 mt-6">
-                      <a
-                        href={member.social.linkedin}
-                        className="p-2 border border-neutral-200 hover:border-black hover:bg-black hover:text-white transition-all duration-300"
-                        aria-label={`${member.firstName} LinkedIn`}
-                      >
-                        <Linkedin size={16} />
-                      </a>
-                      <a
-                        href={member.social.github}
-                        className="p-2 border border-neutral-200 hover:border-black hover:bg-black hover:text-white transition-all duration-300"
-                        aria-label={`${member.firstName} GitHub`}
-                      >
-                        <Github size={16} />
-                      </a>
-                      <a
-                        href={member.social.twitter}
-                        className="p-2 border border-neutral-200 hover:border-black hover:bg-black hover:text-white transition-all duration-300"
-                        aria-label={`${member.firstName} Twitter`}
-                      >
-                        <Twitter size={16} />
-                      </a>
-                      <a
-                        href={`mailto:${member.firstName.toLowerCase()}@triconstudios.com`}
-                        className="p-2 border border-neutral-200 hover:border-black hover:bg-black hover:text-white transition-all duration-300"
-                        aria-label={`Email ${member.firstName}`}
-                      >
-                        <Mail size={16} />
-                      </a>
                     </div>
                   </div>
 
-                  <div className="md:col-span-8">
-                    <div className="flex items-center gap-4 mb-2">
-                      <p className="text-sm uppercase tracking-[0.15em] text-neutral-500">
-                        {member.shortRole}
-                      </p>
-                    </div>
+                  <div className="md:col-span-8 w-full min-w-0">
+                    <p className="text-xs sm:text-sm uppercase tracking-[0.15em] text-neutral-500 mb-2">
+                      {member.shortRole}
+                    </p>
 
-                    <h3 className="text-3xl md:text-4xl font-light text-black mb-2">
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-light text-black mb-2 break-words">
                       {member.firstName} {member.lastName}
                     </h3>
 
-                    <p className="text-neutral-400 text-sm uppercase tracking-[0.1em] mb-8">
+                    <p className="text-neutral-400 text-xs sm:text-sm uppercase tracking-[0.1em] mb-6 sm:mb-8">
                       {member.role}
                     </p>
 
-                    <p className="text-neutral-600 leading-relaxed text-lg mb-8">
+                    <p className="text-neutral-600 leading-relaxed text-base sm:text-lg mb-6 sm:mb-8">
                       {member.bio}
                     </p>
 
-                    <div className="border-l-2 border-neutral-300 pl-6 py-2 mb-8">
-                      <Quote size={20} className="text-neutral-300 mb-2" />
-                      <p className="text-neutral-800 italic text-lg leading-relaxed">
+                    <div className="border-l-2 border-neutral-300 pl-4 sm:pl-6 py-2 mb-6 sm:mb-8">
+                      <Quote size={18} className="text-neutral-300 mb-2" />
+                      <p className="text-neutral-800 italic text-base sm:text-lg leading-relaxed">
                         {member.quote}
                       </p>
                     </div>
 
                     <div>
-                      <p className="text-xs uppercase tracking-[0.15em] text-neutral-500 mb-4">
+                      <p className="text-[10px] sm:text-xs uppercase tracking-[0.15em] text-neutral-500 mb-3 sm:mb-4">
                         Areas of Expertise
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {member.expertise.map((skill) => (
                           <span
                             key={skill}
-                            className="px-4 py-2 text-xs uppercase tracking-[0.05em] border border-neutral-200 text-neutral-600 hover:border-black hover:text-black transition-all duration-300"
+                            className="px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs uppercase tracking-[0.05em] border border-neutral-200 text-neutral-600 hover:border-black hover:text-black transition-all duration-300 break-words"
                           >
                             {skill}
                           </span>
@@ -307,34 +272,32 @@ export default function TeamPage() {
         </div>
       </section>
 
-      <section className="py-24 px-6 md:px-12 lg:px-24 bg-neutral-50 border-t border-neutral-200">
-        <div className="max-w-5xl mx-auto">
-          <motion.div {...fadeInUp} className="mb-16">
-            <p className="text-sm uppercase tracking-[0.2em] text-neutral-500 mb-4">
+      <section className="py-20 sm:py-24 px-4 sm:px-6 md:px-12 lg:px-24 bg-neutral-50 border-t border-neutral-200">
+        <div className="max-w-5xl mx-auto w-full">
+          <motion.div {...fadeInUp} className="mb-12 sm:mb-16">
+            <p className="text-xs sm:text-sm uppercase tracking-[0.2em] text-neutral-500 mb-3 sm:mb-4">
               Our Culture
             </p>
-            <h2 className="text-3xl md:text-4xl font-light text-black">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-light text-black">
               How we work together
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0, duration: 0.5 }}
             >
-              <p className="text-xs uppercase tracking-[0.15em] text-neutral-500 mb-4">
+              <p className="text-xs uppercase tracking-[0.15em] text-neutral-500 mb-3 sm:mb-4">
                 01
               </p>
-              <h3 className="text-xl font-medium text-black mb-3">
+              <h3 className="text-lg sm:text-xl font-medium text-black mb-2 sm:mb-3">
                 Engineering First
               </h3>
-              <p className="text-neutral-600 text-sm leading-relaxed">
+              <p className="text-neutral-600 text-xs sm:text-sm leading-relaxed">
                 Every decision starts with technical feasibility and long-term
-                maintainability. We don't chase trends — we adopt technologies
-                that solve real problems.
+                maintainability.
               </p>
             </motion.div>
 
@@ -342,18 +305,15 @@ export default function TeamPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1, duration: 0.5 }}
             >
-              <p className="text-xs uppercase tracking-[0.15em] text-neutral-500 mb-4">
+              <p className="text-xs uppercase tracking-[0.15em] text-neutral-500 mb-3 sm:mb-4">
                 02
               </p>
-              <h3 className="text-xl font-medium text-black mb-3">
+              <h3 className="text-lg sm:text-xl font-medium text-black mb-2 sm:mb-3">
                 Design With Purpose
               </h3>
-              <p className="text-neutral-600 text-sm leading-relaxed">
-                Every interface we create serves a business goal. Beauty is not
-                decoration — it's a functional tool that guides users and drives
-                conversions.
+              <p className="text-neutral-600 text-xs sm:text-sm leading-relaxed">
+                Every interface we create serves a business goal.
               </p>
             </motion.div>
 
@@ -361,46 +321,42 @@ export default function TeamPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.5 }}
             >
-              <p className="text-xs uppercase tracking-[0.15em] text-neutral-500 mb-4">
+              <p className="text-xs uppercase tracking-[0.15em] text-neutral-500 mb-3 sm:mb-4">
                 03
               </p>
-              <h3 className="text-xl font-medium text-black mb-3">
+              <h3 className="text-lg sm:text-xl font-medium text-black mb-2 sm:mb-3">
                 Own The Outcome
               </h3>
-              <p className="text-neutral-600 text-sm leading-relaxed">
-                We treat every project as our own. From initial discovery to
-                post-launch support, we take full ownership of the results — not
-                just the deliverables.
+              <p className="text-neutral-600 text-xs sm:text-sm leading-relaxed">
+                We treat every project as our own from start to finish.
               </p>
             </motion.div>
           </div>
         </div>
       </section>
 
-      <section className="py-32 px-6 md:px-12 lg:px-24 border-t border-neutral-200">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="py-24 sm:py-32 px-4 sm:px-6 md:px-12 lg:px-24 border-t border-neutral-200">
+        <div className="max-w-4xl mx-auto text-center w-full">
           <motion.div {...fadeInUp}>
-            <h2 className="text-3xl md:text-5xl font-light tracking-tight text-black">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-light tracking-tight text-black break-words">
               Want to join <span className="text-neutral-400">the team?</span>
             </h2>
-            <p className="mt-8 text-neutral-600 text-lg leading-relaxed max-w-2xl mx-auto">
+            <p className="mt-6 sm:mt-8 text-neutral-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
               We're always looking for talented engineers, designers, and
-              creators who share our passion for building exceptional digital
-              products.
+              creators.
             </p>
-            <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row gap-4 justify-center w-full">
               <a
                 href="/contact"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-black text-white hover:bg-neutral-800 transition-all duration-300 text-sm uppercase tracking-[0.1em]"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-black text-white rounded-full hover:bg-neutral-800 transition-all duration-300 text-xs sm:text-sm uppercase tracking-[0.1em]"
               >
                 Get in Touch
                 <ArrowRight size={16} />
               </a>
               <a
                 href="mailto:careers@triconstudios.com"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 border border-neutral-300 hover:border-black transition-all duration-300 text-sm uppercase tracking-[0.1em] text-black"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3 sm:py-4 border border-neutral-300 rounded-full hover:border-black transition-all duration-300 text-xs sm:text-sm uppercase tracking-[0.1em] text-black"
               >
                 <Mail size={16} />
                 careers@triconstudios.com
