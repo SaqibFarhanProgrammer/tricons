@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import StatsBar from "@/components/StatsBar";
 import ServicesSection from "@/components/ServicesSection";
@@ -8,8 +7,6 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import TeamSection from "@/components/TeamSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQSection from "@/components/FAQSection";
-import ContactSection from "@/components/ContactSection";
-import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
@@ -23,7 +20,6 @@ const Index = () => {
       <TeamSection />
       <TestimonialsSection />
       <FAQSection />
-      <ContactSection />
     </>
   );
 };

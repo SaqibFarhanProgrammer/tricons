@@ -6,10 +6,10 @@ import {
   Clock,
   Send,
   MessageSquare,
-  Calendar,
   CheckCircle2,
 } from "lucide-react";
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -67,25 +67,48 @@ export default function ContactPage() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const SERVICE_ID = "service_ipl0fep";
+  const PUBLIC_KEY = "i8EvYBjUBv8cmaaV9";
+  const TEMPLATE_ID = "template_eoynzgo";
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
+    setLoading(true);
+
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      subject: formData.subject,
+      message: formData.message,
+      reply_to: formData.email,
+    };
+
+    emailjs.init(PUBLIC_KEY);
+
+    emailjs
+      .send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
+      .then(() => {
+        setLoading(false);
+        setSubmitted(true);
+        setFormData({ name: "", email: "", subject: "", message: "" });
+
+        setTimeout(() => setSubmitted(false), 4000);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   };
 
   const btnPrimary =
     "inline-flex items-center gap-2 px-6 py-3 rounded-full bg-black text-white hover:bg-neutral-800 transition-all duration-300 text-sm uppercase tracking-[0.1em]";
-
-  const btnOutline =
-    "inline-flex items-center gap-2 px-6 py-3 rounded-full border border-black/20 text-black hover:bg-black hover:text-white transition-all duration-300 text-sm uppercase tracking-[0.1em]";
 
   const iconBtn =
     "p-3 rounded-full border border-black/10 hover:bg-black hover:text-white transition-all duration-300";
 
   return (
     <main className="min-h-screen bg-white text-black">
-      {/* HERO */}
       <section className="pt-28 md:pt-32 pb-16 px-4 md:px-12 lg:px-24">
         <div className="max-w-5xl mx-auto">
           <motion.div {...fadeInUp}>
@@ -94,7 +117,7 @@ export default function ContactPage() {
             </p>
 
             <h1 className="text-4xl md:text-6xl font-semibold mt-6 leading-tight">
-              Let’s build something <span className="text-black">real</span>
+              Let’s build something <span>real</span>
             </h1>
 
             <p className="mt-6 text-black/70 max-w-3xl">
@@ -104,11 +127,8 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* MAIN */}
       <section className="py-16 px-4 md:px-12 lg:px-24 border-t border-black/10">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-10">
-
-          {/* LEFT */}
           <div className="lg:col-span-2 space-y-4">
             {contactInfo.map((item) => (
               <a
@@ -125,9 +145,7 @@ export default function ContactPage() {
                     {item.label}
                   </p>
                   <p className="font-medium">{item.value}</p>
-                  <p className="text-sm text-black/60">
-                    {item.description}
-                  </p>
+                  <p className="text-sm text-black/60">{item.description}</p>
                 </div>
               </a>
             ))}
@@ -137,13 +155,10 @@ export default function ContactPage() {
                 <MessageSquare size={16} />
                 <p className="text-sm font-medium">Fast Response</p>
               </div>
-              <p className="text-sm text-black/70">
-                Replies within 24 hours.
-              </p>
+              <p className="text-sm text-black/70">Replies within 24 hours.</p>
             </div>
           </div>
 
-          {/* FORM */}
           <div className="lg:col-span-3">
             <p className="text-xs uppercase tracking-[0.2em] text-black/60 mb-6">
               Send Message
@@ -153,9 +168,7 @@ export default function ContactPage() {
               <div className="p-10 border border-black/10 rounded-2xl text-center">
                 <CheckCircle2 className="mx-auto mb-4" size={40} />
                 <h3 className="text-xl font-medium">Message Sent</h3>
-                <p className="text-black/60 mt-2">
-                  We will contact you soon.
-                </p>
+                <p className="text-black/60 mt-2">We will contact you soon.</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
@@ -203,8 +216,8 @@ export default function ContactPage() {
                   }
                 />
 
-                <button type="submit" className={btnPrimary}>
-                  Send Message <Send size={16} />
+                <button type="submit" disabled={loading} className={btnPrimary}>
+                  {loading ? "Sending..." : "Send Message"} <Send size={16} />
                 </button>
               </form>
             )}
@@ -212,7 +225,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* PROCESS */}
       <section className="py-16 px-4 md:px-12 lg:px-24 bg-black/[0.02] border-t border-black/10">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl font-light mb-10">Our Process</h2>
@@ -232,11 +244,8 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="py-20 px-4 md:px-12 lg:px-24 text-center border-t border-black/10">
-        <h2 className="text-3xl md:text-5xl font-light">
-          Ready to start?
-        </h2>
+        <h2 className="text-3xl md:text-5xl font-light">Ready to start?</h2>
 
         <p className="text-black/60 mt-4 max-w-xl mx-auto">
           Let’s build something meaningful.
