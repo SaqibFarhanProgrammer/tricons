@@ -8,7 +8,7 @@ const navLinks = [
   { name: "Services", path: "/services" },
   { name: "Projects", path: "/" },
   { name: "Team", path: "/teams" },
-  { name: "Contact", path: "/contact" },
+  // { name: "Contact", path: "/contact" },
 ];
 
 const Navbar = () => {
@@ -28,9 +28,8 @@ const Navbar = () => {
         initial={{ y: -80 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
-        className={`fixed top-0 left-0 right-0 z-50 h-20 flex items-center transition-all ${
-          scrolled ? "glass-header" : "bg-transparent"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 h-20 flex items-center transition-all ${scrolled ? "glass-header" : "bg-transparent"
+          }`}
       >
         <div className="section-container flex items-center justify-between">
 
@@ -50,9 +49,8 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`nav-link ${
-                  location.pathname === link.path ? "text-black font-semibold" : ""
-                }`}
+                className={`nav-link ${location.pathname === link.path ? "text-black font-semibold" : ""
+                  }`}
               >
                 {link.name}
               </Link>
@@ -99,9 +97,8 @@ const Navbar = () => {
                 <Link
                   to={link.path}
                   onClick={() => setMobileOpen(false)}
-                  className={`text-2xl font-semibold uppercase ${
-                    location.pathname === link.path ? "text-black" : "text-neutral-500"
-                  }`}
+                  className={`text-2xl font-semibold uppercase ${location.pathname === link.path ? "text-black" : "text-neutral-500"
+                    }`}
                 >
                   {link.name}
                 </Link>
