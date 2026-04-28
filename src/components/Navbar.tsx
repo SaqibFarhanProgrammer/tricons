@@ -4,10 +4,11 @@ import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const navLinks = [
-  { name: "Who We Are", path: "/about" },
-  { name: "Services", path: "/services" },
-  { name: "Projects", path: "/" },
-  { name: "Team", path: "/teams" },
+  { name: "Home", path: "#home" },
+  { name: "Who We Are", path: "#about" },
+  { name: "Services", path: "#services" },
+  { name: "Projects", path: "#projects" },
+  { name: "Team", path: "#team" },
   { name: "Contact", path: "/contact" },
 ];
 
@@ -22,6 +23,26 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const scrollToSection = (id: string) => {
+    setMobileOpen(false);
+    const element = document.getElementById(id.replace("#", ""));
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleLinkClick = (e: React.MouseEvent, path: string) => {
+    if (path.startsWith("#")) {
+      if (location.pathname === "/") {
+        e.preventDefault();
+        scrollToSection(path);
+      } else {
+        // If not on home page, will navigate to "/" then scroll via hash
+        // (Handled by standard browser behavior or extra logic if needed)
+      }
+    }
+  };
+
   return (
     <>
       <motion.header
@@ -34,7 +55,16 @@ const Navbar = () => {
         <div className="section-container flex items-center justify-between">
 
           {/* LOGO */}
-          <Link to="/" className="flex items-center">
+          <Link
+            to="/"
+            onClick={(e) => {
+              if (location.pathname === "/") {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
+            className="flex items-center"
+          >
             <span className="text-xl font-extrabold tracking-[0.1em] uppercase">
               TRICON
             </span>
@@ -48,7 +78,8 @@ const Navbar = () => {
             {navLinks.map((link) => (
               <Link
                 key={link.name}
-                to={link.path}
+                to={link.path.startsWith("#") ? `/${link.path}` : link.path}
+                onClick={(e) => handleLinkClick(e, link.path)}
                 className={`nav-link ${location.pathname === link.path ? "text-black font-semibold" : ""
                   }`}
               >
@@ -95,8 +126,11 @@ const Navbar = () => {
                 transition={{ delay: i * 0.1 }}
               >
                 <Link
-                  to={link.path}
-                  onClick={() => setMobileOpen(false)}
+                  to={link.path.startsWith("#") ? `/${link.path}` : link.path}
+                  onClick={(e) => {
+                    handleLinkClick(e, link.path);
+                    setMobileOpen(false);
+                  }}
                   className={`text-2xl font-semibold uppercase ${location.pathname === link.path ? "text-black" : "text-neutral-500"
                     }`}
                 >

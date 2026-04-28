@@ -12,7 +12,7 @@ const features = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="section-spacing bg-secondary">
+    <section id="about" className="section-spacing bg-secondary">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 40 }}

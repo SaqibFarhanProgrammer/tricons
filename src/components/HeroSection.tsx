@@ -4,7 +4,7 @@ import light from "@/assets/light.png";
 
 const HeroSection = () => {
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 relative overflow-hidden py-20">
+    <section id="home" className="min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 relative overflow-hidden py-20">
       <img 
         src={light} 
         alt="" 

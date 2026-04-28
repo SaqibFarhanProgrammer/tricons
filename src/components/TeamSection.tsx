@@ -79,7 +79,7 @@ const TeamSection = () => {
   }, []);
 
   return (
-    <section className="min-h-screen py-20 px-4 ">
+    <section id="team" className="min-h-screen py-20 px-4 ">
       <div className="max-w-7xl mx-auto text-center mb-16">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}

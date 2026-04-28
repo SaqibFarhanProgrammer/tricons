@@ -60,10 +60,26 @@ const processSteps = [
 ];
 
 const subjects = [
-  "Web Development",
-  "Mobile App",
-  "UI/UX Design",
-  "AI / Automation",
+  {
+    label: "Web Development",
+    desc: "Building high-performance websites and apps",
+    icon: "🌐",
+  },
+  {
+    label: "Mobile App",
+    desc: "Creating native and cross-platform mobile experiences",
+    icon: "📱",
+  },
+  {
+    label: "UI/UX Design",
+    desc: "Crafting intuitive and beautiful user interfaces",
+    icon: "🎨",
+  },
+  {
+    label: "AI / Automation",
+    desc: "Streamlining workflows with intelligent systems",
+    icon: "🤖",
+  },
 ];
 
 export default function ContactPage() {
@@ -225,21 +241,29 @@ export default function ContactPage() {
                           onClick={() => setIsDropdownOpen(false)}
                         />
                         <motion.div
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 5 }}
-                          exit={{ opacity: 0, y: -10 }}
-                          className="absolute z-20 w-full bg-white border border-black/10 rounded-2xl shadow-xl overflow-hidden py-2"
+                          initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 8, scale: 1 }}
+                          exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                          className="absolute z-20 w-full bg-white border border-black/10 rounded-2xl shadow-2xl overflow-hidden py-3 backdrop-blur-xl bg-white/90"
                         >
                           {subjects.map((item) => (
                             <div
-                              key={item}
-                              className="px-6 py-3 hover:bg-black hover:text-white transition-colors cursor-pointer text-sm"
+                              key={item.label}
+                              className="px-6 py-4 hover:bg-black hover:text-white transition-all cursor-pointer group"
                               onClick={() => {
-                                setFormData({ ...formData, subject: item });
+                                setFormData({ ...formData, subject: item.label });
                                 setIsDropdownOpen(false);
                               }}
                             >
-                              {item}
+                              <div className="flex items-center gap-4">
+                                <span className="text-xl group-hover:scale-110 transition-transform">{item.icon}</span>
+                                <div>
+                                  <p className="font-medium text-sm">{item.label}</p>
+                                  <p className="text-xs opacity-60 group-hover:opacity-80 mt-0.5 line-clamp-1">
+                                    {item.desc}
+                                  </p>
+                                </div>
+                              </div>
                             </div>
                           ))}
                         </motion.div>

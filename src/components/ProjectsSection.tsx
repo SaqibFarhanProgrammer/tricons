@@ -1,16 +1,18 @@
 import { motion } from "framer-motion";
-import projectRestaurant from "@/assets/project-restaurant.jpg";
-import projectSplitty from "@/assets/project-splitty.jpg";
-import projectProjectio from "@/assets/project-projectio.jpg";
+import WealthPluse from "@/assets/WealthPluse.png"
+import FinalWealth from "@/assets/FinalWealth.png"
+import projectSplitty from "@/assets/project-splitty.jpg"
+import SpikEdu from "@/assets/School2.png"
+
 
 const projects = [
   {
-    image: projectRestaurant,
+    image: FinalWealth,
     category: "FINTECH PLATFORM",
     title: "WealthPulse",
     description:
-      "Modern financial dashboard for small businesses with real-time insights, expense tracking, and smart analytics.",
-    tech: ["React", "Node.js", "PostgreSQL"],
+      "WealthPulse is a AI-Powered financial dashboard for small businesses with real-time insights, expense tracking, and smart analytics. ",
+    tech: ["Next Js", "Gemini AI", "Mongo Db"],
   },
   {
     image: projectSplitty,
@@ -21,13 +23,20 @@ const projects = [
     tech: ["Next.js", "Node.js", "PostgreSQL"],
   },
   {
-    image: projectProjectio,
-    category: "SAAS PLATFORM",
-    title: "Projectio",
-    description:
-      "Advanced project management tool with Kanban boards, collaboration, analytics, and real-time tracking.",
-    tech: ["Next.js", "TypeScript", "Tailwind"],
-  },
+    image: SpikEdu,
+    category: "E-LEARNING PLATFORM",
+    title: "SpikEdu",
+    description: "SpikEdu is a comprehensive e-learning platform designed to connect students with expert teachers and provide a seamless learning experience.",
+    tech: ["Next.js", "Nest Js", "Postgrace", "AWS", "Open AI"],
+  }
+  // {
+  //   image: projectProjectio,
+  //   category: "SAAS PLATFORM",
+  //   title: "Projectio",
+  //   description:
+  //     "Advanced project management tool with Kanban boards, collaboration, analytics, and real-time tracking.",
+  //   tech: ["Next.js", "TypeScript", "Tailwind"],
+  // },
 ];
 
 const ProjectsSection = () => {
@@ -35,7 +44,7 @@ const ProjectsSection = () => {
     <section id="projects" className="section-spacing">
       <div className="section-container">
 
-        {/* Header */}
+
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -46,7 +55,7 @@ const ProjectsSection = () => {
           <h2 className="section-title">Projects we're proud of</h2>
         </motion.div>
 
-        {/* Grid */}
+
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12 mt-16">
 
           {projects.map((project, i) => (
@@ -60,11 +69,10 @@ const ProjectsSection = () => {
                 duration: 0.8,
                 ease: [0.4, 0, 0.2, 1],
               }}
-              className={`group relative overflow-hidden aspect-[4/3] cursor-pointer rounded-2xl ${
-                i === 2 ? "md:col-span-2 md:aspect-[2/1]" : ""
-              }`}
+              className={`group relative overflow-hidden aspect-[4/3] cursor-pointer rounded-2xl ${i === 2 ? "md:col-span-2 md:aspect-[2/1]" : ""
+                }`}
             >
-              {/* Image */}
+
               <img
                 src={project.image}
                 alt={project.title}
@@ -72,12 +80,12 @@ const ProjectsSection = () => {
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.08]"
               />
 
-              {/* Gradient overlay */}
+
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              {/* Content */}
+
               <div className="absolute bottom-0 left-0 right-0 p-8 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
-                
+
                 <p className="text-xs uppercase tracking-[0.1em] text-white/70">
                   {project.category}
                 </p>
@@ -102,7 +110,7 @@ const ProjectsSection = () => {
                 </div>
               </div>
 
-              {/* Index number */}
+
               <span className="absolute top-6 left-8 text-[120px] font-light text-white/10 leading-none select-none">
                 {String(i + 1).padStart(2, "0")}
               </span>
