@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Mail,
   Phone,
@@ -7,6 +7,7 @@ import {
   Send,
   MessageSquare,
   CheckCircle2,
+  ChevronDown,
 } from "lucide-react";
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
@@ -58,6 +59,13 @@ const processSteps = [
   { number: "06", title: "Support", desc: "Maintain & scale." },
 ];
 
+const subjects = [
+  "Web Development",
+  "Mobile App",
+  "UI/UX Design",
+  "AI / Automation",
+];
+
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
@@ -68,6 +76,7 @@ export default function ContactPage() {
 
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const SERVICE_ID = "service_ipl0fep";
   const PUBLIC_KEY = "i8EvYBjUBv8cmaaV9";
@@ -75,6 +84,8 @@ export default function ContactPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!formData.subject) return alert("Please select a subject");
+
     setLoading(true);
 
     const templateParams = {
@@ -93,7 +104,6 @@ export default function ContactPage() {
         setLoading(false);
         setSubmitted(true);
         setFormData({ name: "", email: "", subject: "", message: "" });
-
         setTimeout(() => setSubmitted(false), 4000);
       })
       .catch(() => {
@@ -102,7 +112,7 @@ export default function ContactPage() {
   };
 
   const btnPrimary =
-    "inline-flex items-center gap-2 px-6 py-3 rounded-full bg-black text-white hover:bg-neutral-800 transition-all duration-300 text-sm uppercase tracking-[0.1em]";
+    "inline-flex items-center gap-2 px-6 py-3 rounded-full bg-black text-white hover:bg-neutral-800 transition-all duration-300 text-sm uppercase tracking-[0.1em] disabled:opacity-50";
 
   const iconBtn =
     "p-3 rounded-full border border-black/10 hover:bg-black hover:text-white transition-all duration-300";
@@ -115,11 +125,9 @@ export default function ContactPage() {
             <p className="text-xs uppercase tracking-[0.2em] text-black/60">
               Contact
             </p>
-
             <h1 className="text-4xl md:text-6xl font-semibold mt-6 leading-tight">
               Let’s build something <span>real</span>
             </h1>
-
             <p className="mt-6 text-black/70 max-w-3xl">
               Share your idea. We convert it into a scalable digital product.
             </p>
@@ -139,11 +147,8 @@ export default function ContactPage() {
                 <div className={iconBtn}>
                   <item.icon size={18} />
                 </div>
-
                 <div>
-                  <p className="text-xs text-black/60 uppercase">
-                    {item.label}
-                  </p>
+                  <p className="text-xs text-black/60 uppercase">{item.label}</p>
                   <p className="font-medium">{item.value}</p>
                   <p className="text-sm text-black/60">{item.description}</p>
                 </div>
@@ -174,17 +179,19 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <input
+                    required
                     placeholder="Your Name"
-                    className="px-4 py-3 rounded-full border border-black/10 bg-white focus:outline-none"
+                    className="px-6 py-3 rounded-full border border-black/10 bg-white focus:outline-none focus:border-black transition-all"
                     value={formData.name}
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
                     }
                   />
-
                   <input
+                    required
+                    type="email"
                     placeholder="Email"
-                    className="px-4 py-3 rounded-full border border-black/10 bg-white focus:outline-none"
+                    className="px-6 py-3 rounded-full border border-black/10 bg-white focus:outline-none focus:border-black transition-all"
                     value={formData.email}
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
@@ -192,24 +199,60 @@ export default function ContactPage() {
                   />
                 </div>
 
-                <select
-                  className="w-full px-4 py-3 rounded-full border border-black/10 bg-white"
-                  value={formData.subject}
-                  onChange={(e) =>
-                    setFormData({ ...formData, subject: e.target.value })
-                  }
-                >
-                  <option value="">Select Subject</option>
-                  <option>Web Development</option>
-                  <option>Mobile App</option>
-                  <option>UI/UX</option>
-                  <option>AI / Automation</option>
-                </select>
+                {/* Custom Animated Dropdown */}
+                <div className="relative">
+                  <div
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    className={`w-full px-6 py-3 rounded-full border transition-all cursor-pointer flex justify-between items-center ${isDropdownOpen ? "border-black" : "border-black/10"
+                      } bg-white`}
+                  >
+                    <span className={!formData.subject ? "text-black/40" : "text-black text-sm"}>
+                      {formData.subject || "Select Subject"}
+                    </span>
+                    <motion.div
+                      animate={{ rotate: isDropdownOpen ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ChevronDown size={18} className="text-black/40" />
+                    </motion.div>
+                  </div>
+
+                  <AnimatePresence>
+                    {isDropdownOpen && (
+                      <>
+                        <div
+                          className="fixed inset-0 z-10"
+                          onClick={() => setIsDropdownOpen(false)}
+                        />
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 5 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="absolute z-20 w-full bg-white border border-black/10 rounded-2xl shadow-xl overflow-hidden py-2"
+                        >
+                          {subjects.map((item) => (
+                            <div
+                              key={item}
+                              className="px-6 py-3 hover:bg-black hover:text-white transition-colors cursor-pointer text-sm"
+                              onClick={() => {
+                                setFormData({ ...formData, subject: item });
+                                setIsDropdownOpen(false);
+                              }}
+                            >
+                              {item}
+                            </div>
+                          ))}
+                        </motion.div>
+                      </>
+                    )}
+                  </AnimatePresence>
+                </div>
 
                 <textarea
+                  required
                   rows={6}
                   placeholder="Your message"
-                  className="w-full px-4 py-3 rounded-2xl border border-black/10 bg-white resize-none"
+                  className="w-full px-6 py-4 rounded-2xl border border-black/10 bg-white resize-none focus:outline-none focus:border-black transition-all"
                   value={formData.message}
                   onChange={(e) =>
                     setFormData({ ...formData, message: e.target.value })
@@ -228,12 +271,11 @@ export default function ContactPage() {
       <section className="py-16 px-4 md:px-12 lg:px-24 bg-black/[0.02] border-t border-black/10">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl font-light mb-10">Our Process</h2>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {processSteps.map((step) => (
               <div
                 key={step.number}
-                className="p-6 border border-black/10 rounded-2xl bg-white"
+                className="p-6 border border-black/10 rounded-2xl bg-white hover:border-black transition-colors"
               >
                 <p className="text-3xl text-black/20">{step.number}</p>
                 <h3 className="font-medium mt-2">{step.title}</h3>
@@ -246,11 +288,9 @@ export default function ContactPage() {
 
       <section className="py-20 px-4 md:px-12 lg:px-24 text-center border-t border-black/10">
         <h2 className="text-3xl md:text-5xl font-light">Ready to start?</h2>
-
         <p className="text-black/60 mt-4 max-w-xl mx-auto">
           Let’s build something meaningful.
         </p>
-
         <a
           href="mailto:hello@triconstudios.com"
           className={btnPrimary + " mt-8"}
