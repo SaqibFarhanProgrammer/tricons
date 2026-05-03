@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import WealthPluse from "@/assets/WealthPluse.png"
-import FinalWealth from "@/assets/FinalWealth.png"
+import FinalWealth from "@/assets/Finalwealth.png"
 import projectSplitty from "@/assets/project-splitty.jpg"
 import SpikEdu from "@/assets/School2.png"
 
