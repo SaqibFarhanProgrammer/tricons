@@ -7,6 +7,7 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import TeamSection from "@/components/TeamSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQSection from "@/components/FAQSection";
+import CTASection from "@/components/CTA";
 
 const Index = () => {
   return (
@@ -20,6 +21,7 @@ const Index = () => {
       <TeamSection />
       <TestimonialsSection />
       <FAQSection />
+      <CTASection/>
     </>
   );
 };

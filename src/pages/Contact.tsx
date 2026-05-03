@@ -1,13 +1,11 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Mail,
   Phone,
   MapPin,
   Clock,
   Send,
-  MessageSquare,
   CheckCircle2,
-  ChevronDown,
 } from "lucide-react";
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
@@ -25,60 +23,24 @@ const contactInfo = [
     label: "Email",
     value: "hello@triconstudios.com",
     href: "mailto:hello@triconstudios.com",
-    description: "We respond within 24 hours",
   },
   {
     icon: Phone,
     label: "Phone",
     value: "+92 317 838 6880",
     href: "tel:+923178386880",
-    description: "Mon - Sat, 9am - 6pm",
   },
   {
     icon: MapPin,
     label: "Location",
     value: "Pakistan",
     href: "#",
-    description: "Remote worldwide",
   },
   {
     icon: Clock,
     label: "Availability",
     value: "Open for projects",
     href: "#",
-    description: "Currently accepting work",
-  },
-];
-
-const processSteps = [
-  { number: "01", title: "Discovery", desc: "Understand goals." },
-  { number: "02", title: "Planning", desc: "Define scope." },
-  { number: "03", title: "Design", desc: "UI system & wireframes." },
-  { number: "04", title: "Development", desc: "Build in sprints." },
-  { number: "05", title: "Launch", desc: "Deploy & optimize." },
-  { number: "06", title: "Support", desc: "Maintain & scale." },
-];
-
-const subjects = [
-  {
-    label: "Web Development",
-    desc: "Building high-performance websites and apps",
-    icon: "🌐",
-  },
-  {
-    label: "Mobile App",
-    desc: "Creating native and cross-platform mobile experiences",
-    icon: "📱",
-  },
-  {
-    label: "UI/UX Design",
-    desc: "Crafting intuitive and beautiful user interfaces",
-    icon: "🎨",
-  },
-  {
-    label: "AI / Automation",
-    desc: "Streamlining workflows with intelligent systems",
-    icon: "🤖",
   },
 ];
 
@@ -86,22 +48,19 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "",
+    subject: "General Inquiry",
     message: "",
   });
 
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const SERVICE_ID = "service_ipl0fep";
-  const PUBLIC_KEY = "i8EvYBjUBv8cmaaV9";
-  const TEMPLATE_ID = "template_eoynzgo";
+  const SERVICE_ID = "service_zfacoka";
+  const TEMPLATE_ID = "template_67uc1gh";
+  const PUBLIC_KEY = "1AE55HBtgnTghIHlm";
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.subject) return alert("Please select a subject");
-
     setLoading(true);
 
     const templateParams = {
@@ -112,18 +71,23 @@ export default function ContactPage() {
       reply_to: formData.email,
     };
 
-    emailjs.init(PUBLIC_KEY);
-
     emailjs
       .send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
       .then(() => {
         setLoading(false);
         setSubmitted(true);
-        setFormData({ name: "", email: "", subject: "", message: "" });
+        setFormData({
+          name: "",
+          email: "",
+          subject: "General Inquiry",
+          message: "",
+        });
         setTimeout(() => setSubmitted(false), 4000);
       })
-      .catch(() => {
+      .catch((error) => {
+        console.error(error);
         setLoading(false);
+        alert("Failed to send message. Try again.");
       });
   };
 
@@ -135,17 +99,16 @@ export default function ContactPage() {
 
   return (
     <main className="min-h-screen bg-white text-black">
-      <section className="pt-28 md:pt-32 pb-16 px-4 md:px-12 lg:px-24">
+      
+      <section className="pt-28 pb-16 px-4 md:px-12 lg:px-24">
         <div className="max-w-5xl mx-auto">
           <motion.div {...fadeInUp}>
-            <p className="text-xs uppercase tracking-[0.2em] text-black/60">
-              Contact
-            </p>
-            <h1 className="text-4xl md:text-6xl font-semibold mt-6 leading-tight">
-              Let’s build something <span>real</span>
+            <p className="text-xs uppercase text-black/60">Contact</p>
+            <h1 className="text-4xl md:text-6xl font-semibold mt-6">
+              Let’s build something real
             </h1>
-            <p className="mt-6 text-black/70 max-w-3xl">
-              Share your idea. We convert it into a scalable digital product.
+            <p className="mt-4 text-black/70">
+              Share your idea. We convert it into a digital product.
             </p>
           </motion.div>
         </div>
@@ -153,6 +116,8 @@ export default function ContactPage() {
 
       <section className="py-16 px-4 md:px-12 lg:px-24 border-t border-black/10">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-10">
+
+          {/* Contact Info */}
           <div className="lg:col-span-2 space-y-4">
             {contactInfo.map((item) => (
               <a
@@ -166,25 +131,13 @@ export default function ContactPage() {
                 <div>
                   <p className="text-xs text-black/60 uppercase">{item.label}</p>
                   <p className="font-medium">{item.value}</p>
-                  <p className="text-sm text-black/60">{item.description}</p>
                 </div>
               </a>
             ))}
-
-            <div className="p-5 border border-black/10 rounded-2xl bg-black/5">
-              <div className="flex items-center gap-2 mb-2">
-                <MessageSquare size={16} />
-                <p className="text-sm font-medium">Fast Response</p>
-              </div>
-              <p className="text-sm text-black/70">Replies within 24 hours.</p>
-            </div>
           </div>
 
+          {/* Form */}
           <div className="lg:col-span-3">
-            <p className="text-xs uppercase tracking-[0.2em] text-black/60 mb-6">
-              Send Message
-            </p>
-
             {submitted ? (
               <div className="p-10 border border-black/10 rounded-2xl text-center">
                 <CheckCircle2 className="mx-auto mb-4" size={40} />
@@ -193,90 +146,33 @@ export default function ContactPage() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input
-                    required
-                    placeholder="Your Name"
-                    className="px-6 py-3 rounded-full border border-black/10 bg-white focus:outline-none focus:border-black transition-all"
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                  />
-                  <input
-                    required
-                    type="email"
-                    placeholder="Email"
-                    className="px-6 py-3 rounded-full border border-black/10 bg-white focus:outline-none focus:border-black transition-all"
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                  />
-                </div>
 
-                {/* Custom Animated Dropdown */}
-                <div className="relative">
-                  <div
-                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                    className={`w-full px-6 py-3 rounded-full border transition-all cursor-pointer flex justify-between items-center ${isDropdownOpen ? "border-black" : "border-black/10"
-                      } bg-white`}
-                  >
-                    <span className={!formData.subject ? "text-black/40" : "text-black text-sm"}>
-                      {formData.subject || "Select Subject"}
-                    </span>
-                    <motion.div
-                      animate={{ rotate: isDropdownOpen ? 180 : 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <ChevronDown size={18} className="text-black/40" />
-                    </motion.div>
-                  </div>
+                <input
+                  required
+                  placeholder="Your Name"
+                  className="w-full px-6 py-3 rounded-full border border-black/10"
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                />
 
-                  <AnimatePresence>
-                    {isDropdownOpen && (
-                      <>
-                        <div
-                          className="fixed inset-0 z-10"
-                          onClick={() => setIsDropdownOpen(false)}
-                        />
-                        <motion.div
-                          initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                          animate={{ opacity: 1, y: 8, scale: 1 }}
-                          exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                          className="absolute z-20 w-full bg-white border border-black/10 rounded-2xl shadow-2xl overflow-hidden py-3 backdrop-blur-xl bg-white/90"
-                        >
-                          {subjects.map((item) => (
-                            <div
-                              key={item.label}
-                              className="px-6 py-4 hover:bg-black hover:text-white transition-all cursor-pointer group"
-                              onClick={() => {
-                                setFormData({ ...formData, subject: item.label });
-                                setIsDropdownOpen(false);
-                              }}
-                            >
-                              <div className="flex items-center gap-4">
-                                <span className="text-xl group-hover:scale-110 transition-transform">{item.icon}</span>
-                                <div>
-                                  <p className="font-medium text-sm">{item.label}</p>
-                                  <p className="text-xs opacity-60 group-hover:opacity-80 mt-0.5 line-clamp-1">
-                                    {item.desc}
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          ))}
-                        </motion.div>
-                      </>
-                    )}
-                  </AnimatePresence>
-                </div>
+                <input
+                  required
+                  type="email"
+                  placeholder="Email"
+                  className="w-full px-6 py-3 rounded-full border border-black/10"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                />
 
                 <textarea
                   required
                   rows={6}
                   placeholder="Your message"
-                  className="w-full px-6 py-4 rounded-2xl border border-black/10 bg-white resize-none focus:outline-none focus:border-black transition-all"
+                  className="w-full px-6 py-4 rounded-2xl border border-black/10"
                   value={formData.message}
                   onChange={(e) =>
                     setFormData({ ...formData, message: e.target.value })
@@ -286,42 +182,14 @@ export default function ContactPage() {
                 <button type="submit" disabled={loading} className={btnPrimary}>
                   {loading ? "Sending..." : "Send Message"} <Send size={16} />
                 </button>
+
               </form>
             )}
           </div>
+
         </div>
       </section>
 
-      <section className="py-16 px-4 md:px-12 lg:px-24 bg-black/[0.02] border-t border-black/10">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-light mb-10">Our Process</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {processSteps.map((step) => (
-              <div
-                key={step.number}
-                className="p-6 border border-black/10 rounded-2xl bg-white hover:border-black transition-colors"
-              >
-                <p className="text-3xl text-black/20">{step.number}</p>
-                <h3 className="font-medium mt-2">{step.title}</h3>
-                <p className="text-sm text-black/60 mt-2">{step.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 px-4 md:px-12 lg:px-24 text-center border-t border-black/10">
-        <h2 className="text-3xl md:text-5xl font-light">Ready to start?</h2>
-        <p className="text-black/60 mt-4 max-w-xl mx-auto">
-          Let’s build something meaningful.
-        </p>
-        <a
-          href="mailto:hello@triconstudios.com"
-          className={btnPrimary + " mt-8"}
-        >
-          Contact Us
-        </a>
-      </section>
     </main>
   );
 }

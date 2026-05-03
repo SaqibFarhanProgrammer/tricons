@@ -1,14 +1,18 @@
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import light from "@/assets/light.png";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+
   return (
     <section id="home" className="min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 relative overflow-hidden py-20">
-      <img 
-        src={light} 
-        alt="" 
-        className="w-full h-full object-cover absolute inset-0 brightness-200 blur-[60px] sm:blur-[80px] lg:blur-[110px] -rotate-45 -z-10 opacity-60 pointer-events-none" 
+      
+      <img
+        src={light}
+        alt=""
+        className="w-full h-full object-cover absolute inset-0 brightness-200 blur-[60px] sm:blur-[80px] lg:blur-[110px] -rotate-45 -z-10 opacity-60 pointer-events-none"
       />
 
       <motion.p
@@ -35,7 +39,7 @@ const HeroSection = () => {
         transition={{ duration: 0.8, delay: 0.6 }}
         className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mt-6 sm:mt-8 leading-relaxed px-4 z-10"
       >
-        An elite agency combining cutting-edge technology with exceptional design to deliver solutions that make a real difference.
+        An elite agency combining cutting-edge technology with exceptional design.
       </motion.p>
 
       <motion.div
@@ -45,11 +49,12 @@ const HeroSection = () => {
         className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 mt-8 sm:mt-10 z-10 w-full sm:w-auto px-4"
       >
         <button
-          onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+          onClick={() => navigate("/contact")}
           className="w-full sm:w-auto bg-primary text-primary-foreground px-6 sm:px-8 py-3 sm:py-4 text-sm font-medium uppercase tracking-wider hover:bg-primary/90 transition-colors rounded-full"
         >
           Start a Project
         </button>
+
         <button
           onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
           className="flex items-center justify-center gap-2 text-sm font-medium uppercase tracking-wider hover:opacity-70 transition-opacity group"
