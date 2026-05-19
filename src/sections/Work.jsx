@@ -34,6 +34,11 @@ export default function Projects() {
               key={project.id}
               className="group relative w-full aspect-[4/5] md:aspect-[3/4] rounded-2xl overflow-hidden border border-black/10"
             >
+              <Link
+                href="/contact"
+                className="absolute inset-0 z-10"
+                aria-label={`Start a project like ${project.title}`}
+              />
               <Image
                 src={project.image}
                 alt={`${project.title} project preview`}
@@ -42,16 +47,16 @@ export default function Projects() {
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
 
-              <div className="absolute bottom-0 left-0 w-full p-6 md:p-8">
-                <h3 className="text-black text-2xl md:text-3xl tracking-tight font-semibold">
+              <div className="absolute bottom-0 left-0 w-full p-6 md:p-8 z-[1] pointer-events-none">
+                <h3 className="text-white text-2xl md:text-3xl tracking-tight font-semibold">
                   {project.title}
                 </h3>
                 <ul className="flex flex-wrap gap-2 mt-2 list-none m-0 p-0">
                   {project.tags.map((tag) => (
                     <li key={tag}>
-                      <span className="text-black/50 text-[10px] md:text-xs tracking-wide border border-black/10 px-2 py-1 rounded-full">
+                      <span className="text-white/80 text-[10px] md:text-xs tracking-wide border border-white/25 px-2 py-1 rounded-full">
                         {tag}
                       </span>
                     </li>
@@ -62,6 +67,11 @@ export default function Projects() {
           ))}
 
           <article className="group relative w-full aspect-[16/9] md:col-span-2 rounded-2xl overflow-hidden border border-black/10">
+            <Link
+              href="/contact"
+              className="absolute inset-0 z-10"
+              aria-label={`Start a project like ${third.title}`}
+            />
             <Image
               src={third.image}
               alt={`${third.title} project preview`}
@@ -70,16 +80,16 @@ export default function Projects() {
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
 
-            <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
 
-            <div className="absolute bottom-0 left-0 w-full p-6 md:p-8">
-              <h3 className="text-black text-2xl md:text-3xl tracking-tight font-semibold">
+            <div className="absolute bottom-0 left-0 w-full p-6 md:p-8 z-[1] pointer-events-none">
+              <h3 className="text-white text-2xl md:text-3xl tracking-tight font-semibold">
                 {third.title}
               </h3>
               <ul className="flex flex-wrap gap-2 mt-2 list-none m-0 p-0">
                 {third.tags.map((tag) => (
                   <li key={tag}>
-                    <span className="text-black/50 text-[10px] md:text-xs tracking-wide border border-black/10 px-2 py-1 rounded-full">
+                    <span className="text-white/80 text-[10px] md:text-xs tracking-wide border border-white/25 px-2 py-1 rounded-full">
                       {tag}
                     </span>
                   </li>

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import PageCta from "@/components/PageCta";
+import PageHeader from "@/components/PageHeader";
 import { services } from "@/data/services";
 import { createMetadata, webPageJsonLd, servicesJsonLd } from "@/lib/seo";
 import { site } from "@/lib/site";
@@ -27,7 +29,10 @@ export const metadata = createMetadata({
 
 export default function ServicesPage() {
   return (
-    <main id="main-content" className="w-full bg-white px-6 md:px-10 py-24 md:py-32">
+    <main
+      id="main-content"
+      className="page-main w-full bg-white px-6 md:px-10 pb-24 md:pb-32"
+    >
       <JsonLd
         data={[
           webPageJsonLd({
@@ -40,42 +45,34 @@ export default function ServicesPage() {
       />
 
       <article className="max-w-5xl mx-auto">
-        <p className="text-black/50 text-xs tracking-[0.2em] uppercase">
-          OUR SERVICES
-        </p>
-        <h1 className="text-4xl md:text-6xl font-semibold tracking-tighter leading-[1.05] mt-6">
-          Digital Services That Drive Real Growth
-        </h1>
+        <PageHeader
+          eyebrow="Our services"
+          title="Digital Services That Drive Real Growth"
+          description={metaDescription}
+        />
 
-        <div className="grid md:grid-cols-2 gap-8 mt-16">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8 mt-14 md:mt-16">
           {services.map((item) => (
             <div
               key={item.title}
-              className="p-9 border border-black/10 rounded-3xl hover:border-black/30 transition-all"
+              className="group p-8 md:p-9 border border-black/10 rounded-3xl hover:border-black/30 hover:shadow-sm transition-all duration-300"
             >
-              <h3 className="text-2xl font-semibold">{item.title}</h3>
-              <p className="text-black/70 mt-4 text-[17px]">{item.description}</p>
+              <h3 className="text-xl md:text-2xl font-semibold">{item.title}</h3>
+              <p className="text-black/70 mt-4 text-[17px] leading-relaxed">
+                {item.description}
+              </p>
               <Link
                 href="/contact"
-                className="inline-block mt-6 text-sm font-medium"
+                className="inline-flex items-center gap-1 mt-6 text-sm font-medium text-black/80 group-hover:text-black transition-colors"
               >
-                Discuss this service →
+                Discuss this service
+                <span aria-hidden="true">→</span>
               </Link>
             </div>
           ))}
         </div>
 
-        <section className="mt-28 text-center bg-zinc-950 text-white rounded-3xl py-20">
-          <h2 className="text-4xl md:text-5xl font-semibold">
-            Let’s Bring Your Idea to Life
-          </h2>
-          <Link
-            href="/contact"
-            className="mt-8 inline-block px-12 py-4 bg-white text-black rounded-full font-medium"
-          >
-            Start Your Project
-          </Link>
-        </section>
+        <PageCta title="Let’s Bring Your Idea to Life" />
       </article>
     </main>
   );

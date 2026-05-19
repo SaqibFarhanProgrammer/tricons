@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import PageCta from "@/components/PageCta";
+import PageHeader from "@/components/PageHeader";
 import { portfolioProjects } from "@/data/projects";
 import { createMetadata, webPageJsonLd, itemListJsonLd } from "@/lib/seo";
 import { site, getAbsoluteUrl } from "@/lib/site";
@@ -34,7 +36,10 @@ export default function WorkPage() {
   }));
 
   return (
-    <main id="main-content" className="w-full bg-white px-6 md:px-10 py-24 md:py-32">
+    <main
+      id="main-content"
+      className="page-main w-full bg-white px-6 md:px-10 pb-24 md:pb-32"
+    >
       <JsonLd
         data={[
           webPageJsonLd({
@@ -50,18 +55,17 @@ export default function WorkPage() {
       />
 
       <article className="max-w-6xl mx-auto">
-        <p className="text-black/50 text-xs tracking-[0.2em] uppercase">
-          SELECTED WORK
-        </p>
-        <h1 className="text-4xl md:text-6xl font-semibold tracking-tighter leading-[1.05] mt-6">
-          Projects Built with Precision & Performance
-        </h1>
+        <PageHeader
+          eyebrow="Selected work"
+          title="Projects Built with Precision & Performance"
+          description={metaDescription}
+        />
 
-        <ul className="grid md:grid-cols-2 gap-8 mt-16">
+        <ul className="grid md:grid-cols-2 gap-6 md:gap-8 mt-14 md:mt-16 list-none m-0 p-0">
           {portfolioProjects.map((project, i) => (
             <li
               key={project.title}
-              className="group relative overflow-hidden rounded-3xl border border-black/10"
+              className="group relative overflow-hidden rounded-3xl border border-black/10 bg-black"
             >
               <div className="relative aspect-[16/10]">
                 <Image
@@ -69,14 +73,18 @@ export default function WorkPage() {
                   alt={`${project.title} - Tricons Project`}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                   priority={i < 2}
                 />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-              <div className="absolute bottom-0 p-8 text-white">
-                <p className="uppercase text-xs tracking-widest">{project.tag}</p>
-                <h3 className="text-2xl font-semibold mt-2">{project.title}</h3>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
+              <div className="absolute bottom-0 p-6 md:p-8 text-white z-[1] pointer-events-none">
+                <p className="uppercase text-[10px] tracking-[0.2em] text-white/70">
+                  {project.tag}
+                </p>
+                <h3 className="text-xl md:text-2xl font-semibold mt-2">
+                  {project.title}
+                </h3>
               </div>
               <Link
                 href="/contact"
@@ -87,25 +95,11 @@ export default function WorkPage() {
           ))}
         </ul>
 
-        <section className="mt-28 text-center bg-zinc-950 text-white rounded-3xl py-20 px-8">
-          <h2 className="text-4xl md:text-5xl font-semibold">
-            Want Similar Results?
-          </h2>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
-            <Link
-              href="/contact"
-              className="px-12 py-4 bg-white text-black rounded-full font-medium"
-            >
-              Start Your Project
-            </Link>
-            <Link
-              href="/services"
-              className="px-12 py-4 border border-white/50 rounded-full"
-            >
-              Our Services
-            </Link>
-          </div>
-        </section>
+        <PageCta
+          title="Want Similar Results?"
+          secondaryHref="/services"
+          secondaryLabel="Our Services"
+        />
       </article>
     </main>
   );

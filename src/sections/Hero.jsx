@@ -6,10 +6,14 @@ export default function Hero() {
       aria-labelledby="hero-heading"
       className="relative w-full min-h-screen bg-white overflow-hidden flex items-center justify-center"
     >
-      <div className="relative z-10 flex flex-col items-center justify-center w-full min-h-screen px-6 text-center pt-16">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(0,0,0,0.06),transparent)]"
+      />
+      <div className="relative z-10 flex flex-col items-center justify-center w-full min-h-screen px-6 text-center pt-20 pb-16">
         <h1
           id="hero-heading"
-          className="text-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight max-w-4xl font-semibold"
+          className="text-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight max-w-4xl font-semibold text-balance"
         >
           We Design & Build Digital Experiences That Grow Brands
         </h1>

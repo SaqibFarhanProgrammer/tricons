@@ -23,7 +23,7 @@ export default function Navbar() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-black/60 text-[11px] tracking-wide hover:text-black transition-colors duration-300"
+                  className="text-black/60 text-[11px] tracking-wide hover:text-black transition-colors duration-300 focus-visible:outline-none focus-visible:text-black"
                 >
                   {link.label}
                 </Link>
@@ -33,7 +33,7 @@ export default function Navbar() {
 
           <Link
             href="/contact"
-            className="hidden md:inline-flex items-center justify-center px-5 py-1.5 bg-black text-white text-[11px] tracking-wide rounded-full hover:bg-black/90 transition-all duration-300 hover:scale-105 active:scale-95"
+            className="hidden md:inline-flex items-center justify-center px-5 py-1.5 bg-black text-white text-[11px] tracking-wide rounded-full hover:bg-black/90 transition-all duration-300 hover:scale-105 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
           >
             Get in Touch
           </Link>

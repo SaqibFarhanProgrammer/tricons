@@ -1,31 +1,19 @@
 const brands = [
-  { name: "NOVA", font: "font-['c']", style: "text-xl tracking-[0.25em]" },
-  { name: "APEX", font: "font-['b']", style: "text-lg tracking-[0.4em] uppercase" },
-  { name: "ORBIT", font: "font-['a']", style: "text-xl tracking-[0.15em]" },
-  { name: "PRISM", font: "font-['c']", style: "text-2xl tracking-tight" },
-  {
-    name: "FLUX",
-    font: "font-['Inter-regular']",
-    style: "text-lg tracking-[0.3em] font-light",
-  },
-  { name: "VOXEL", font: "font-['b']", style: "text-xl tracking-[0.2em]" },
-  { name: "HELIX", font: "font-['italic']", style: "text-2xl tracking-wide" },
-  { name: "NEXUS", font: "font-['a']", style: "text-lg tracking-[0.35em]" },
-  { name: "AURA", font: "font-['c']", style: "text-2xl tracking-[0.1em]" },
-  {
-    name: "CIPHER",
-    font: "font-['Inter-regular']",
-    style: "text-sm tracking-[0.5em] uppercase",
-  },
-  { name: "ZENITH", font: "font-['b']", style: "text-xl tracking-[0.3em]" },
-  { name: "KINETIC", font: "font-['a']", style: "text-lg tracking-[0.2em]" },
-  { name: "STRATOS", font: "font-['c']", style: "text-xl tracking-[0.15em]" },
-  {
-    name: "PULSE",
-    font: "font-['Inter-regular']",
-    style: "text-lg tracking-[0.4em] font-light",
-  },
-  { name: "VERTEX", font: "font-['b']", style: "text-xl tracking-[0.25em]" },
+  "NOVA",
+  "APEX",
+  "ORBIT",
+  "PRISM",
+  "FLUX",
+  "VOXEL",
+  "HELIX",
+  "NEXUS",
+  "AURA",
+  "CIPHER",
+  "ZENITH",
+  "KINETIC",
+  "STRATOS",
+  "PULSE",
+  "VERTEX",
 ];
 
 /** Server Component — CSS-only marquee (no client JS). */
@@ -35,10 +23,10 @@ export default function LogoMarquee() {
   return (
     <section
       aria-label="Brands we work with"
-      className="relative w-full bg-white py-16 md:py-24 overflow-hidden"
+      className="relative w-full bg-white py-16 md:py-24 overflow-hidden border-y border-black/5"
     >
-      <div className="max-w-6xl mx-auto px-6 md:px-10 mb-12 md:mb-16">
-        <p className="text-black/60 text-xs md:text-sm tracking-[0.15em] uppercase">
+      <div className="max-w-6xl mx-auto px-6 md:px-10 mb-10 md:mb-12">
+        <p className="text-black/50 text-xs tracking-[0.2em] uppercase">
           Trusted by industry leaders
         </p>
       </div>
@@ -54,15 +42,13 @@ export default function LogoMarquee() {
         />
 
         <ul className="marquee-track flex items-center w-max list-none m-0 p-0">
-          {allBrands.map((brand, index) => (
+          {allBrands.map((name, index) => (
             <li
-              key={`${brand.name}-${index}`}
-              className="flex items-center justify-center px-8 md:px-12 min-w-[140px] md:min-w-[180px]"
+              key={`${name}-${index}`}
+              className="flex items-center justify-center px-10 md:px-14 min-w-[120px] md:min-w-[160px]"
             >
-              <span
-                className={`${brand.font} ${brand.style} text-black/60 hover:text-black transition-colors duration-500 select-none`}
-              >
-                {brand.name}
+              <span className="text-sm md:text-base font-medium tracking-[0.25em] text-black/40 hover:text-black/70 transition-colors duration-500 select-none uppercase">
+                {name}
               </span>
             </li>
           ))}

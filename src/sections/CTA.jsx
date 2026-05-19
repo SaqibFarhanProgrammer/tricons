@@ -33,14 +33,12 @@ export default function CTASection() {
             Start a Project
           </Link>
 
-          <a
-            href="https://wa.me/923XXXXXXXXX"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/services"
             className="inline-flex items-center justify-center px-8 py-3.5 bg-transparent text-black text-sm tracking-wide rounded-full border border-black/20 hover:bg-black/5 transition-all duration-300"
           >
-            Chat on WhatsApp
-          </a>
+            Explore Services
+          </Link>
         </div>
       </div>
     </section>

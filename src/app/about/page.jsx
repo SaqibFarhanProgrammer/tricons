@@ -1,10 +1,32 @@
-import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import PageCta from "@/components/PageCta";
+import PageHeader from "@/components/PageHeader";
 import { createMetadata, webPageJsonLd } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 const metaDescription =
   "Tricons is a Karachi-based digital agency specializing in high-performance websites, custom web applications, UI/UX design, AI solutions, automation, and ROI-driven performance marketing.";
+
+const expertise = [
+  {
+    title: "Website Development",
+    description:
+      "SEO-first, lightning-fast websites using Next.js and modern architecture.",
+  },
+  {
+    title: "Web Applications",
+    description: "Scalable SaaS, dashboards, and enterprise web apps.",
+  },
+  {
+    title: "UI/UX Design",
+    description:
+      "Conversion-focused, accessible, and delightful user experiences.",
+  },
+  {
+    title: "Performance Marketing",
+    description: "Meta Ads, Google Ads, and data-driven growth campaigns.",
+  },
+];
 
 export const metadata = createMetadata({
   title: "About Tricons | Digital Agency Karachi | Web Development Pakistan",
@@ -28,7 +50,10 @@ export const metadata = createMetadata({
 
 export default function AboutPage() {
   return (
-    <main id="main-content" className="w-full bg-white px-6 md:px-10 py-24 md:py-32">
+    <main
+      id="main-content"
+      className="page-main w-full bg-white px-6 md:px-10 pb-24 md:pb-32"
+    >
       <JsonLd
         data={webPageJsonLd({
           name: `About ${site.name}`,
@@ -39,21 +64,13 @@ export default function AboutPage() {
       />
 
       <article className="max-w-5xl mx-auto">
-        <p className="text-black/50 text-xs tracking-[0.2em] uppercase font-medium">
-          ABOUT TRICONS
-        </p>
+        <PageHeader
+          eyebrow="About Tricons"
+          title="Premium Digital Agency in Karachi Building High-Performance Digital Experiences"
+          description="We help ambitious businesses grow through beautiful, fast, and conversion-focused websites, web apps, and digital strategies."
+        />
 
-        <h1 className="text-black text-4xl md:text-6xl font-semibold tracking-tighter leading-[1.05] mt-6">
-          Premium Digital Agency in Karachi Building High-Performance Digital
-          Experiences
-        </h1>
-
-        <p className="mt-8 text-black/70 text-lg leading-relaxed max-w-3xl">
-          We help ambitious businesses grow through beautiful, fast, and
-          conversion-focused websites, web apps, and digital strategies.
-        </p>
-
-        <hr className="my-16 border-black/10" />
+        <hr className="my-14 md:my-16 border-black/10" />
 
         <section aria-labelledby="expertise-heading">
           <h2
@@ -63,49 +80,26 @@ export default function AboutPage() {
             Our Expertise
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-10 mt-12">
-            {[
-              "Website Development",
-              "Web Applications",
-              "UI/UX Design",
-              "Performance Marketing",
-            ].map((title) => (
-              <div key={title}>
-                <h3 className="font-semibold text-xl">{title}</h3>
+          <div className="grid md:grid-cols-2 gap-8 md:gap-10 mt-10 md:mt-12">
+            {expertise.map((item) => (
+              <div
+                key={item.title}
+                className="p-8 rounded-2xl border border-black/10 hover:border-black/25 transition-colors"
+              >
+                <h3 className="font-semibold text-xl">{item.title}</h3>
                 <p className="text-black/70 mt-3 text-[17px] leading-relaxed">
-                  {title === "Website Development" &&
-                    "SEO-first, lightning-fast websites using Next.js and modern architecture."}
-                  {title === "Web Applications" &&
-                    "Scalable SaaS, dashboards, and enterprise web apps."}
-                  {title === "UI/UX Design" &&
-                    "Conversion-focused, accessible, and delightful user experiences."}
-                  {title === "Performance Marketing" &&
-                    "Meta Ads, Google Ads, and data-driven growth campaigns."}
+                  {item.description}
                 </p>
               </div>
             ))}
           </div>
         </section>
 
-        <section className="mt-28 text-center bg-zinc-950 text-white rounded-3xl py-20 px-8">
-          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight">
-            Ready to Work Together?
-          </h2>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
-            <Link
-              href="/contact"
-              className="px-12 py-4 bg-white text-black rounded-full font-medium hover:bg-white/90"
-            >
-              Start a Project
-            </Link>
-            <Link
-              href="/work"
-              className="px-12 py-4 border border-white/50 rounded-full hover:bg-white/10"
-            >
-              View Our Work
-            </Link>
-          </div>
-        </section>
+        <PageCta
+          title="Ready to Work Together?"
+          secondaryHref="/work"
+          secondaryLabel="View Our Work"
+        />
       </article>
     </main>
   );

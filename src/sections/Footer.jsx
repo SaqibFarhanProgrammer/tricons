@@ -99,10 +99,38 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-black/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-black/30 text-[11px] tracking-wide">
+        <div className="mt-16 pt-8 border-t border-black/10 flex flex-col md:flex-row items-center justify-between gap-6">
+          <p className="text-black/40 text-[11px] tracking-wide">
             © {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
+          <div className="flex items-center gap-5">
+            {site.linkedin ? (
+              <a
+                href={site.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-black/50 text-sm hover:text-black transition-colors"
+              >
+                LinkedIn
+              </a>
+            ) : null}
+            {site.instagram ? (
+              <a
+                href={site.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-black/50 text-sm hover:text-black transition-colors"
+              >
+                Instagram
+              </a>
+            ) : null}
+            <Link
+              href="/contact"
+              className="text-black/50 text-sm hover:text-black transition-colors"
+            >
+              Contact
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

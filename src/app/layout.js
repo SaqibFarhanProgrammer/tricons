@@ -28,13 +28,10 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col font-sans">
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:bg-black focus:text-white focus:rounded-md"
-        >
+      <body className="min-h-full flex flex-col font-sans bg-white text-foreground">
+        <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
         <JsonLd data={organizationJsonLd()} />
