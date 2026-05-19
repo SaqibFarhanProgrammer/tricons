@@ -1,79 +1,79 @@
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { services } from "@/data/services";
-import { createMetadata, servicesJsonLd, webPageJsonLd } from "@/lib/seo";
+import { createMetadata, webPageJsonLd, servicesJsonLd } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-const description =
-  "Explore Tricons services: website development, full-stack apps, UI/UX design, AI solutions, automation systems, and performance digital marketing.";
+const metaDescription =
+  "Tricons offers professional web development, web applications, UI/UX design, AI solutions, automation, and performance marketing services in Karachi, Pakistan.";
 
 export const metadata = createMetadata({
-  title: "Services",
-  description,
+  title:
+    "Services | Web Development, UI/UX & Digital Marketing Agency Karachi",
+  description: metaDescription,
   path: "/services",
+  keywords: [
+    "web development karachi",
+    "ui ux design karachi",
+    "digital marketing agency pakistan",
+    "next.js development",
+    "ai solutions karachi",
+    "web app development pakistan",
+  ],
+  openGraph: {
+    title: "Our Services — Tricons Digital Agency",
+  },
 });
 
 export default function ServicesPage() {
-  const jsonLdItems = services.map((s) => ({
-    name: s.title,
-    description: s.description,
-  }));
-
   return (
-    <main className="w-full bg-white px-6 md:px-10 py-24 md:py-32">
+    <main id="main-content" className="w-full bg-white px-6 md:px-10 py-24 md:py-32">
       <JsonLd
         data={[
           webPageJsonLd({
             name: `${site.name} Services`,
-            description,
+            description: metaDescription,
             path: "/services",
           }),
-          servicesJsonLd({ items: jsonLdItems }),
+          servicesJsonLd({ items: services }),
         ]}
       />
 
       <article className="max-w-5xl mx-auto">
-        <p className="text-black/40 text-[10px] tracking-[0.2em] uppercase">
-          Services
+        <p className="text-black/50 text-xs tracking-[0.2em] uppercase">
+          OUR SERVICES
         </p>
-
-        <h1 className="text-black text-4xl md:text-6xl font-semibold tracking-tight leading-[1.1] mt-6">
-          Digital services built for growth, performance, and scale
+        <h1 className="text-4xl md:text-6xl font-semibold tracking-tighter leading-[1.05] mt-6">
+          Digital Services That Drive Real Growth
         </h1>
 
-        <p className="mt-6 text-black/60 text-base md:text-lg leading-relaxed max-w-3xl">
-          {site.description}
-        </p>
-
-        <ul className="grid md:grid-cols-2 gap-6 mt-16 list-none m-0 p-0">
+        <div className="grid md:grid-cols-2 gap-8 mt-16">
           {services.map((item) => (
-            <li
+            <div
               key={item.title}
-              className="p-8 rounded-2xl border border-black/10 hover:border-black/20 transition-all duration-300"
+              className="p-9 border border-black/10 rounded-3xl hover:border-black/30 transition-all"
             >
-              <h2 className="text-black text-lg font-semibold">{item.title}</h2>
-              <p className="text-black/60 text-sm mt-3 leading-relaxed">
-                {item.description}
-              </p>
-            </li>
+              <h3 className="text-2xl font-semibold">{item.title}</h3>
+              <p className="text-black/70 mt-4 text-[17px]">{item.description}</p>
+              <Link
+                href="/contact"
+                className="inline-block mt-6 text-sm font-medium"
+              >
+                Discuss this service →
+              </Link>
+            </div>
           ))}
-        </ul>
+        </div>
 
-        <section className="mt-20 text-center" aria-labelledby="services-cta-heading">
-          <h2
-            id="services-cta-heading"
-            className="text-black text-2xl md:text-3xl font-semibold"
-          >
-            Ready to start your project?
+        <section className="mt-28 text-center bg-zinc-950 text-white rounded-3xl py-20">
+          <h2 className="text-4xl md:text-5xl font-semibold">
+            Let’s Bring Your Idea to Life
           </h2>
-          <p className="text-black/50 mt-4">
-            Tell us what you need — we’ll recommend the right stack and timeline.
-          </p>
           <Link
             href="/contact"
-            className="inline-flex mt-8 px-8 py-3 bg-black text-white rounded-full hover:bg-black/90 transition"
+            className="mt-8 inline-block px-12 py-4 bg-white text-black rounded-full font-medium"
           >
-            Get in Touch
+            Start Your Project
           </Link>
         </section>
       </article>

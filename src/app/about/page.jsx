@@ -3,106 +3,108 @@ import JsonLd from "@/components/JsonLd";
 import { createMetadata, webPageJsonLd } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-const description =
-  "Learn about Tricons — a digital agency building websites, web apps, UI/UX, AI solutions, automation, and performance marketing for growing brands.";
+const metaDescription =
+  "Tricons is a Karachi-based digital agency specializing in high-performance websites, custom web applications, UI/UX design, AI solutions, automation, and ROI-driven performance marketing.";
 
 export const metadata = createMetadata({
-  title: "About Us",
-  description,
+  title: "About Tricons | Digital Agency Karachi | Web Development Pakistan",
+  description: metaDescription,
   path: "/about",
+  keywords: [
+    "digital agency karachi",
+    "web development karachi",
+    "web development pakistan",
+    "ui ux design karachi",
+    "next.js agency pakistan",
+    "performance marketing karachi",
+    "ai solutions karachi",
+    "best digital agency pakistan",
+    "tricons agency",
+  ],
+  openGraph: {
+    title: "About Tricons — Digital Agency Karachi",
+  },
 });
 
 export default function AboutPage() {
   return (
-    <main className="w-full bg-white px-6 md:px-10 py-24 md:py-32">
+    <main id="main-content" className="w-full bg-white px-6 md:px-10 py-24 md:py-32">
       <JsonLd
         data={webPageJsonLd({
           name: `About ${site.name}`,
-          description,
+          description: metaDescription,
           path: "/about",
+          type: "AboutPage",
         })}
       />
 
       <article className="max-w-5xl mx-auto">
-        <p className="text-black/40 text-[10px] tracking-[0.2em] uppercase">
-          About Us
+        <p className="text-black/50 text-xs tracking-[0.2em] uppercase font-medium">
+          ABOUT TRICONS
         </p>
 
-        <h1 className="text-black text-4xl md:text-6xl font-semibold tracking-tight leading-[1.1] mt-6">
-          We are a digital agency focused on building websites, apps, and modern
-          digital solutions.
+        <h1 className="text-black text-4xl md:text-6xl font-semibold tracking-tighter leading-[1.05] mt-6">
+          Premium Digital Agency in Karachi Building High-Performance Digital
+          Experiences
         </h1>
 
-        <p className="mt-6 text-black/60 text-base md:text-lg leading-relaxed max-w-3xl">
-          We design and develop websites, web applications, and digital products
-          for businesses. Our work covers UI/UX design, full-stack development,
-          and performance-focused digital marketing.
+        <p className="mt-8 text-black/70 text-lg leading-relaxed max-w-3xl">
+          We help ambitious businesses grow through beautiful, fast, and
+          conversion-focused websites, web apps, and digital strategies.
         </p>
 
-        <hr className="my-16 border-t border-black/10" />
+        <hr className="my-16 border-black/10" />
 
-        <h2 className="text-black text-2xl md:text-3xl font-semibold">
-          What we do
-        </h2>
-
-        <ul className="grid md:grid-cols-2 gap-6 mt-10 list-none m-0 p-0">
-          <li className="p-6 border border-black/10 rounded-xl">
-            <h3 className="text-black font-medium">Website Development</h3>
-            <p className="text-black/60 text-sm mt-2">
-              Responsive websites using modern frontend technologies and SEO-first
-              architecture.
-            </p>
-          </li>
-          <li className="p-6 border border-black/10 rounded-xl">
-            <h3 className="text-black font-medium">Web Applications</h3>
-            <p className="text-black/60 text-sm mt-2">
-              Web apps with authentication, APIs, and dashboards built for scale.
-            </p>
-          </li>
-          <li className="p-6 border border-black/10 rounded-xl">
-            <h3 className="text-black font-medium">UI/UX Design</h3>
-            <p className="text-black/60 text-sm mt-2">
-              Clean interfaces focused on usability, accessibility, and conversion.
-            </p>
-          </li>
-          <li className="p-6 border border-black/10 rounded-xl">
-            <h3 className="text-black font-medium">Digital Marketing</h3>
-            <p className="text-black/60 text-sm mt-2">
-              Meta Ads, Google Ads, and growth campaigns focused on measurable ROI.
-            </p>
-          </li>
-        </ul>
-
-        <section className="mt-20" aria-labelledby="approach-heading">
+        <section aria-labelledby="expertise-heading">
           <h2
-            id="approach-heading"
-            className="text-black text-2xl md:text-3xl font-semibold"
+            id="expertise-heading"
+            className="text-3xl md:text-4xl font-semibold tracking-tight"
           >
-            Our approach
+            Our Expertise
           </h2>
-          <p className="mt-6 text-black/60 leading-relaxed max-w-3xl">
-            We focus on clear communication, intentional design, and functional
-            development. Every project is built from client requirements without
-            unnecessary complexity.
-          </p>
+
+          <div className="grid md:grid-cols-2 gap-10 mt-12">
+            {[
+              "Website Development",
+              "Web Applications",
+              "UI/UX Design",
+              "Performance Marketing",
+            ].map((title) => (
+              <div key={title}>
+                <h3 className="font-semibold text-xl">{title}</h3>
+                <p className="text-black/70 mt-3 text-[17px] leading-relaxed">
+                  {title === "Website Development" &&
+                    "SEO-first, lightning-fast websites using Next.js and modern architecture."}
+                  {title === "Web Applications" &&
+                    "Scalable SaaS, dashboards, and enterprise web apps."}
+                  {title === "UI/UX Design" &&
+                    "Conversion-focused, accessible, and delightful user experiences."}
+                  {title === "Performance Marketing" &&
+                    "Meta Ads, Google Ads, and data-driven growth campaigns."}
+                </p>
+              </div>
+            ))}
+          </div>
         </section>
 
-        <section className="mt-20 text-center" aria-labelledby="about-cta-heading">
-          <h2
-            id="about-cta-heading"
-            className="text-black text-2xl md:text-3xl font-semibold"
-          >
-            Let’s work together
+        <section className="mt-28 text-center bg-zinc-950 text-white rounded-3xl py-20 px-8">
+          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight">
+            Ready to Work Together?
           </h2>
-          <p className="text-black/50 mt-4">
-            If you have a project idea, we can help you build it.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex mt-8 px-8 py-3 bg-black text-white rounded-full hover:bg-black/90 transition"
-          >
-            Contact Us
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
+            <Link
+              href="/contact"
+              className="px-12 py-4 bg-white text-black rounded-full font-medium hover:bg-white/90"
+            >
+              Start a Project
+            </Link>
+            <Link
+              href="/work"
+              className="px-12 py-4 border border-white/50 rounded-full hover:bg-white/10"
+            >
+              View Our Work
+            </Link>
+          </div>
         </section>
       </article>
     </main>

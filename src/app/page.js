@@ -6,7 +6,7 @@ import LogoMarquee from "@/sections/LogoMarque";
 import Process from "@/sections/Prosses";
 import ServicesSection from "@/sections/Services";
 import Projects from "@/sections/Work";
-import { createMetadata, webPageJsonLd } from "@/lib/seo";
+import { createMetadata, webPageJsonLd, webSiteJsonLd } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const metadata = createMetadata({
@@ -19,11 +19,14 @@ export default function HomePage() {
   return (
     <main id="main-content">
       <JsonLd
-        data={webPageJsonLd({
-          name: site.name,
-          description: site.description,
-          path: "/",
-        })}
+        data={[
+          webSiteJsonLd(),
+          webPageJsonLd({
+            name: site.name,
+            description: site.description,
+            path: "/",
+          }),
+        ]}
       />
       <Hero />
       <LogoMarquee />

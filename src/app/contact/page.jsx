@@ -2,78 +2,57 @@ import JsonLd from "@/components/JsonLd";
 import { createMetadata, webPageJsonLd } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-const description =
-  "Contact Tricons to discuss your next website, app, or marketing project. We typically respond within 24–48 hours.";
+const metaDescription =
+  "Contact Tricons Digital Agency Karachi for website, web app, UI/UX, AI or marketing projects. Fast response within 24-48 hours.";
 
 export const metadata = createMetadata({
-  title: "Contact",
-  description,
+  title: "Contact Tricons | Digital Agency Karachi",
+  description: metaDescription,
   path: "/contact",
+  keywords: [
+    "contact digital agency karachi",
+    "web development quote pakistan",
+    "hire web developer karachi",
+  ],
+  openGraph: {
+    title: "Contact Tricons Digital Agency",
+  },
 });
 
 export default function ContactPage() {
   return (
-    <main className="w-full bg-white px-6 md:px-10 py-24 md:py-32">
+    <main id="main-content" className="w-full bg-white px-6 md:px-10 py-24 md:py-32">
       <JsonLd
-        data={[
-          webPageJsonLd({
-            name: `Contact ${site.name}`,
-            description,
-            path: "/contact",
-          }),
-          {
-            "@context": "https://schema.org",
-            "@type": "ContactPage",
-            name: `Contact ${site.name}`,
-            url: new URL("/contact", site.url).toString(),
-            mainEntity: {
-              "@type": "Organization",
-              name: site.legalName,
-              email: site.email,
-              url: site.url,
-            },
-          },
-        ]}
+        data={webPageJsonLd({
+          name: `Contact ${site.name}`,
+          description: metaDescription,
+          path: "/contact",
+          type: "ContactPage",
+        })}
       />
 
       <article className="max-w-3xl mx-auto text-center">
-        <p className="text-black/40 text-[10px] tracking-[0.2em] uppercase">
-          Contact
+        <p className="text-black/50 text-xs tracking-[0.2em] uppercase">
+          GET IN TOUCH
         </p>
-
-        <h1 className="text-black text-4xl md:text-6xl font-semibold tracking-tight leading-[1.1] mt-6">
-          Let’s talk about your next project
+        <h1 className="text-4xl md:text-6xl font-semibold tracking-tighter leading-[1.05] mt-6">
+          Let’s Discuss Your Project
         </h1>
 
-        <p className="mt-6 text-black/60 text-base md:text-lg leading-relaxed">
-          Share your idea, product, or business goal. We’ll respond with a clear
-          direction and next steps.
-        </p>
-
-        <section
-          className="mt-14 border border-black/10 rounded-2xl p-10 md:p-14"
-          aria-labelledby="contact-direct-heading"
-        >
-          <h2 id="contact-direct-heading" className="sr-only">
-            Direct contact
-          </h2>
-          <p className="text-black/50 text-sm mb-6">Direct contact</p>
+        <section className="mt-16 bg-zinc-50 border border-black/10 rounded-3xl p-12 md:p-16">
           <a
             href={`mailto:${site.email}`}
-            className="inline-flex items-center justify-center px-10 py-4 bg-black text-white text-sm tracking-wide rounded-full hover:bg-black/90 transition-all duration-300 hover:scale-105 active:scale-95"
+            className="inline-block px-12 py-5 bg-black text-white rounded-full text-lg font-medium hover:bg-black/90"
           >
             Send Email
           </a>
-          <p className="text-black/40 text-xs mt-6">
-            <a href={`mailto:${site.email}`} className="hover:text-black/60">
+          <p className="mt-6 text-black">
+            <a href={`mailto:${site.email}`} className="hover:underline">
               {site.email}
             </a>
           </p>
+          <p className="text-black/50 mt-8">We reply within 24–48 hours</p>
         </section>
-
-        <p className="mt-16 text-black/40 text-xs tracking-wide">
-          Typical response time: 24–48 hours
-        </p>
       </article>
     </main>
   );

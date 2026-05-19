@@ -1,14 +1,15 @@
-import { jsonLdScript } from "@/lib/seo";
-
 /**
  * Server-rendered structured data for crawlers.
  * @param {{ data: Record<string, unknown> | Record<string, unknown>[] }} props
  */
 export default function JsonLd({ data }) {
-  return (
+  const blocks = Array.isArray(data) ? data : [data];
+
+  return blocks.map((block, index) => (
     <script
+      key={index}
       type="application/ld+json"
-      dangerouslySetInnerHTML={jsonLdScript(data)}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(block) }}
     />
-  );
+  ));
 }
