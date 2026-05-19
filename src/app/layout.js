@@ -2,8 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import JsonLd from "@/components/JsonLd";
 import Footer from "@/sections/Footer";
-import { createMetadata } from "@/lib/seo";
-import { organizationJsonLd } from "@/lib/seo";
+import { createMetadata, organizationJsonLd } from "@/lib/seo";
 import { site } from "@/lib/site";
 import "./globals.css";
 

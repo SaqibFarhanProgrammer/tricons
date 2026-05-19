@@ -1,109 +1,82 @@
-export default function AboutPage() {
+import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
+import { services } from "@/data/services";
+import { createMetadata, servicesJsonLd, webPageJsonLd } from "@/lib/seo";
+import { site } from "@/lib/site";
+
+const description =
+  "Explore Tricons services: website development, full-stack apps, UI/UX design, AI solutions, automation systems, and performance digital marketing.";
+
+export const metadata = createMetadata({
+  title: "Services",
+  description,
+  path: "/services",
+});
+
+export default function ServicesPage() {
+  const jsonLdItems = services.map((s) => ({
+    name: s.title,
+    description: s.description,
+  }));
+
   return (
-    <section className="w-full bg-white px-6 md:px-10 py-24 md:py-32">
+    <main className="w-full bg-white px-6 md:px-10 py-24 md:py-32">
+      <JsonLd
+        data={[
+          webPageJsonLd({
+            name: `${site.name} Services`,
+            description,
+            path: "/services",
+          }),
+          servicesJsonLd({ items: jsonLdItems }),
+        ]}
+      />
 
-      <div className="max-w-5xl mx-auto">
-
-        {/* Header */}
-        <span className="text-black/40 text-[10px] tracking-[0.2em] uppercase">
-          About Tricons Agency
-        </span>
+      <article className="max-w-5xl mx-auto">
+        <p className="text-black/40 text-[10px] tracking-[0.2em] uppercase">
+          Services
+        </p>
 
         <h1 className="text-black text-4xl md:text-6xl font-semibold tracking-tight leading-[1.1] mt-6">
-          We build digital products, automate businesses, and design experiences that scale.
+          Digital services built for growth, performance, and scale
         </h1>
 
         <p className="mt-6 text-black/60 text-base md:text-lg leading-relaxed max-w-3xl">
-          Tricons is a full-service digital agency focused on modern web development, AI-powered solutions, automation systems, and high-performance digital marketing. We help startups and businesses turn ideas into scalable digital products.
+          {site.description}
         </p>
 
-        {/* Divider */}
-        <div className="my-16 border-t border-black/10" />
+        <ul className="grid md:grid-cols-2 gap-6 mt-16 list-none m-0 p-0">
+          {services.map((item) => (
+            <li
+              key={item.title}
+              className="p-8 rounded-2xl border border-black/10 hover:border-black/20 transition-all duration-300"
+            >
+              <h2 className="text-black text-lg font-semibold">{item.title}</h2>
+              <p className="text-black/60 text-sm mt-3 leading-relaxed">
+                {item.description}
+              </p>
+            </li>
+          ))}
+        </ul>
 
-        {/* What We Do */}
-        <h2 className="text-black text-2xl md:text-3xl font-semibold">
-          What we do
-        </h2>
-
-        <div className="grid md:grid-cols-2 gap-6 mt-10">
-
-          <div className="p-6 border border-black/10 rounded-xl">
-            <h3 className="text-black font-semibold">Website Development</h3>
-            <p className="text-black/60 text-sm mt-2">
-              Modern, fast, responsive websites using Next.js, React, and scalable architecture.
-            </p>
-          </div>
-
-          <div className="p-6 border border-black/10 rounded-xl">
-            <h3 className="text-black font-semibold">Full Stack Web Apps</h3>
-            <p className="text-black/60 text-sm mt-2">
-              End-to-end applications with authentication, dashboards, APIs, and database integration.
-            </p>
-          </div>
-
-          <div className="p-6 border border-black/10 rounded-xl">
-            <h3 className="text-black font-semibold">AI Development</h3>
-            <p className="text-black/60 text-sm mt-2">
-              Chatbots, AI assistants, and intelligent systems integrated into real-world products.
-            </p>
-          </div>
-
-          <div className="p-6 border border-black/10 rounded-xl">
-            <h3 className="text-black font-semibold">Automation Systems</h3>
-            <p className="text-black/60 text-sm mt-2">
-              Business automation tools that reduce manual work and increase efficiency.
-            </p>
-          </div>
-
-          <div className="p-6 border border-black/10 rounded-xl">
-            <h3 className="text-black font-semibold">UI/UX Design</h3>
-            <p className="text-black/60 text-sm mt-2">
-              Clean, modern interfaces designed for conversion, usability, and user experience.
-            </p>
-          </div>
-
-          <div className="p-6 border border-black/10 rounded-xl">
-            <h3 className="text-black font-semibold">Digital Marketing</h3>
-            <p className="text-black/60 text-sm mt-2">
-              Meta Ads, Google Ads, and performance campaigns focused on ROI and growth.
-            </p>
-          </div>
-
-        </div>
-
-        {/* Philosophy Section */}
-        <div className="mt-20">
-          <h2 className="text-black text-2xl md:text-3xl font-semibold">
-            Our approach
+        <section className="mt-20 text-center" aria-labelledby="services-cta-heading">
+          <h2
+            id="services-cta-heading"
+            className="text-black text-2xl md:text-3xl font-semibold"
+          >
+            Ready to start your project?
           </h2>
-
-          <p className="mt-6 text-black/60 leading-relaxed max-w-3xl">
-            We don’t use templates or generic solutions. Every project is built from scratch with strategy, design thinking, and engineering precision. Our goal is simple — build systems that actually grow businesses, not just websites that look good.
-          </p>
-        </div>
-
-        {/* CTA */}
-        <div className="mt-20 text-center">
-
-          <h3 className="text-black text-2xl md:text-3xl font-semibold">
-            Let’s build something powerful
-          </h3>
-
           <p className="text-black/50 mt-4">
-            From idea to execution — we handle everything.
+            Tell us what you need — we’ll recommend the right stack and timeline.
           </p>
-
-          <a
-            href="#contact"
+          <Link
+            href="/contact"
             className="inline-flex mt-8 px-8 py-3 bg-black text-white rounded-full hover:bg-black/90 transition"
           >
-            Start a Project
-          </a>
-
-        </div>
-
-      </div>
-
-    </section>
-  )
+            Get in Touch
+          </Link>
+        </section>
+      </article>
+    </main>
+  );
 }
